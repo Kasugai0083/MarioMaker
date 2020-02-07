@@ -33,13 +33,17 @@ SceneId UpdateTitleScene()
 
 void DrawTitleScene()
 {
+	Vec2 bg_pos(0.f,0.f);
+
+	DrawTexture(bg_pos, GetTexture(TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::TitleBgTex));
 }
 
 
 
 void InitTitleScene()
 {
-
+	LoadTexture("Res/TitleBg.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::TitleBgTex);
+	//LoadTexture("Res/TitleBg.png", 0, 0);
 	ChangeSceneStep(SceneStep::MainStep);
 }
 

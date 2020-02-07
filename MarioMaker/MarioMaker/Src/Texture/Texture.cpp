@@ -77,7 +77,6 @@ bool LoadTexture(const char* file_name, int id, int texture_id)
 	{
 		return false;
 	}
-
 	return CreateTexture(file_name, g_TextureList[id][texture_id]);
 }
 

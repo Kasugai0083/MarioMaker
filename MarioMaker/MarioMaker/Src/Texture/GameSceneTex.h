@@ -3,6 +3,7 @@
 /** @brief ゲーム本編用テクスチャのリスト */
 enum GameCategoryTextureList
 {
+	GameSceneBgTex,
 	GameTextureMax
 };
 
