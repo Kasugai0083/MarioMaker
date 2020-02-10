@@ -31,7 +31,7 @@ int APIENTRY WinMain(HINSTANCE ,HINSTANCE, LPSTR, INT)
 		MessageBox(NULL,"ウィンドウ作成失敗",NULL, MB_OK);
 	}
 
-	scene_ctr->Init(SceneID::RESULT);
+	scene_ctr->Init(SceneID::TITLE);
 
 	t_Size font_size{ 32.f,32.f };
 	dx_mgr->CreateFontDevice(font_size);

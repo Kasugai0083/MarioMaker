@@ -142,6 +142,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Actor\Character\Player\Player.cpp" />
+    <ClCompile Include="Src\Actor\Character\Enemy\Enemy.cpp" />
+    <ClCompile Include="Src\Actor\Block\Block.cpp" />
+    <ClCompile Include="Src\Map\Map.cpp" />
     <ClCompile Include="Src\Engine\Device.cpp" />
     <ClCompile Include="Src\Engine\Graphics\DirectX.cpp" />
     <ClCompile Include="Src\Engine\Graphics\Drawer2D.cpp" />
@@ -152,6 +156,11 @@
     <ClCompile Include="Src\Scene\Title\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Actor\Character\Player\Player.h" />
+    <ClInclude Include="Src\Actor\Character\Enemy\Enemy.h" />
+    <ClInclude Include="Src\Actor\Block\Block.h" />
+    <ClInclude Include="Src\Actor\Character\CharacterBase.h" />
+    <ClInclude Include="Src\Map\Map.h" />
     <ClInclude Include="Src\Engine\Device.h" />
     <ClInclude Include="Src\Engine\Graphics\DirectX.h" />
     <ClInclude Include="Src\Engine\Graphics\Drawer2D.h" />
