@@ -4,10 +4,15 @@
 #include <sstream> //for istringstream
 #include <algorithm> //for replace
 
-
-
 FileReader::FileReader()
 {
+	for (int i = 0; i < MAP_H; i++)
+	{
+		for (int j = 0; j < MAP_W; j++)
+		{
+			tmp_map[i][j] = 0;
+		}
+	}
 }
 
 
@@ -15,7 +20,8 @@ FileReader::~FileReader()
 {
 }
 
-void FileReader::LoadCSV(std::string fileName_) {
+void FileReader::LoadCSV(std::string fileName_) 
+{
 	// ifstream => コンストラクタでファイル読み込み
 	std::ifstream ifs(fileName_);
 
@@ -29,7 +35,8 @@ void FileReader::LoadCSV(std::string fileName_) {
 
 	// 1 行読み込み
 	// str に ifs から読み込んだ行を格納
-	while (getline(ifs, str)) {
+	while (getline(ifs, str)) 
+	{
 
 		// 文頭から文末までのイテレーターを調査して
 		// ',' を ' ' に変換する
@@ -53,7 +60,8 @@ void FileReader::LoadCSV(std::string fileName_) {
 
 }
 
-void FileReader::SaveCSV(std::string fileName_) {
+void FileReader::SaveCSV(std::string fileName_) 
+{
 	// 別ファイル出力用のコンテナクラス
 	std::ofstream oss(fileName_);
 
@@ -66,8 +74,10 @@ void FileReader::SaveCSV(std::string fileName_) {
 	// 1 行読み込み
 	// str に ifs から読み込んだ行を格納
 
-	for (int i = 0; i < MAP_H; i++) {
-		for (int j = 0; j < MAP_W; j++) {
+	for (int i = 0; i < MAP_H; i++) 
+	{
+		for (int j = 0; j < MAP_W; j++) 
+		{
 			oss << tmp_map[i][j] << ",";
 		}
 		oss << "\n";
@@ -75,4 +85,16 @@ void FileReader::SaveCSV(std::string fileName_) {
 
 	oss.close();
 
+}
+
+
+void FileReader::GetMapCSV(int* map_[MAP_H][MAP_W])
+{
+	for (int i = 0; i < MAP_H; i++)
+	{
+		for (int j = 0; j < MAP_W; j++)
+		{
+			*map_[i][j] = tmp_map[i][j];
+		}
+	}
 }

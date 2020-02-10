@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\FileReader\FileReader.cpp" />
     <ClCompile Include="Src\Actor\Character\Player\Player.cpp" />
     <ClCompile Include="Src\Actor\Character\Enemy\Enemy.cpp" />
     <ClCompile Include="Src\Actor\Block\Block.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Src\Scene\Title\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\FileReader\FileReader.h" />
     <ClInclude Include="Src\Actor\Character\Player\Player.h" />
     <ClInclude Include="Src\Actor\Character\Enemy\Enemy.h" />
     <ClInclude Include="Src\Actor\Block\Block.h" />
