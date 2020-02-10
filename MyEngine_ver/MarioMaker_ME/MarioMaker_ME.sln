@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MarioMaker_ME", "MarioMaker_ME\MarioMaker_ME.vcxproj", "{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Debug|x64.ActiveCfg = Debug|x64
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Debug|x64.Build.0 = Debug|x64
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Debug|x86.ActiveCfg = Debug|Win32
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Debug|x86.Build.0 = Debug|Win32
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Release|x64.ActiveCfg = Release|x64
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Release|x64.Build.0 = Release|x64
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Release|x86.ActiveCfg = Release|Win32
+		{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BB4159B-07FC-4DDD-BE96-D3E2E374C06C}
+	EndGlobalSection
+EndGlobal

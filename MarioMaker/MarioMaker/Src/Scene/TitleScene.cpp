@@ -35,15 +35,15 @@ void DrawTitleScene()
 {
 	Vec2 bg_pos(0.f,0.f);
 
-	DrawTexture(bg_pos, GetTexture(TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::TitleBgTex));
+	DrawTexture(bg_pos, GetTexture("Res/TitleBg.png"));
 }
 
 
 
 void InitTitleScene()
 {
-	LoadTexture("Res/TitleBg.png", TEXTURE_CATEGORY_TITLE, TitleCategoryTextureList::TitleBgTex);
-	//LoadTexture("Res/TitleBg.png", 0, 0);
+	LoadTexture("Res/TitleBg.png");
+
 	ChangeSceneStep(SceneStep::MainStep);
 }
 
@@ -56,7 +56,7 @@ void MainTitleScene()
 
 SceneId FinishTitleScene()
 {	
-	ReleaseCategoryTexture(TEXTURE_CATEGORY_TITLE);
+	AllReleaseTexture();
 
 	return SceneId::GameScene;
 
