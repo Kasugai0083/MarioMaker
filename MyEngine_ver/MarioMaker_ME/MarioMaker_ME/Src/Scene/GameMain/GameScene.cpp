@@ -7,20 +7,20 @@ GameScene::~GameScene()
 
 void GameScene::Init()
 {
-		
+	m_drawer2d.LoadTexture("Res/Game/game_main_bg.png");
 	// シーン遷移
 	m_state = SceneState::UPDATE;
 }
 
 void GameScene::Update() {
 
-	if (Device::KeyPress('A')) { m_state = SceneState::END; }
+	if (Device::KeyPress(VK_SPACE)) { m_state = SceneState::END; }
 }
 
 SceneID GameScene::End() {
+	m_drawer2d.AllRelease();
+
 	m_state = SceneState::INIT;
-
-
 	return SceneID::RESULT;
 }
 
@@ -40,8 +40,8 @@ SceneID GameScene::Control() {
 }
 
 void GameScene::Draw() {
-	t_Vec2 font_pos(0.f, 0.f);
-	m_drawer2d.DrawFont(font_pos, "ゲームシーンを表示");
+	Pos2 bg_pos(0.f, 0.f);
+	m_drawer2d.DrawTexture(bg_pos, "Res/Game/game_main_bg.png");
 
 }
 

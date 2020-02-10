@@ -8,8 +8,11 @@
 * @brief ウィンドウとマウス制御する関数群
 */
 
-const int WIN_W = 640;
-const int WIN_H = 480;
+const int WIN_W = 1280;
+const int WIN_H = 720;
+
+const int WIN_CENTER_X = WIN_W / 2;
+const int WIN_CENTER_Y = WIN_H / 2;
 
 namespace Device{
 	

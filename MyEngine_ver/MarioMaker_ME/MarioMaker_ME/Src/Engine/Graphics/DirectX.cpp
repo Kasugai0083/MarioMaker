@@ -78,7 +78,7 @@ void DxManager::StartDraw() {
 	m_dx_status.d3d_device->Clear(0,
 		NULL,
 		D3DCLEAR_TARGET,
-		D3DCOLOR_ARGB(255, 0, 0, 255),
+		D3DCOLOR_ARGB(255, 255, 255, 255),
 		0.0f,	// Zバッファの初期値
 		0);		// ステンシルバッファの初期値
 

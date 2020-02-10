@@ -11,16 +11,18 @@ TitleScene::~TitleScene()
 }
 
 void TitleScene::Init() {
-
+	m_drawer2d.LoadTexture("Res/Title/title_bg.png");
 	m_state = SceneState::UPDATE;
 }
 
 void TitleScene::Update() {
 
-	if (Device::KeyPress('A')) { m_state = SceneState::END; }
+	if (Device::KeyPress(VK_SPACE)) { m_state = SceneState::END; }
 }
 
 SceneID TitleScene::End() {
+	m_drawer2d.AllRelease();
+
 	m_state = SceneState::INIT;
 	return SceneID::GAME;
 }
@@ -41,7 +43,8 @@ SceneID TitleScene::Control() {
 }
 
 void TitleScene::Draw() {
-	t_Vec2 font_pos(0.f, 0.f);
-	m_drawer2d.DrawFont(font_pos, "タイトルシーンを表示");
+	t_Vec2 bg_pos(0.f, 0.f);
+
+	m_drawer2d.DrawTexture(bg_pos, "Res/Title/title_bg.png");
 
 }
