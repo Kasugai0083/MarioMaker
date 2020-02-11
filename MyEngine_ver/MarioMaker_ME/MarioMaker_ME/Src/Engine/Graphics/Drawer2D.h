@@ -51,11 +51,11 @@ public:
 		}
 	}
 
-	/**
-	* @brief テクスチャ情報を取得
-	* @return テクスチャ情報のポインタを返す
-	*/
-	t_Texture* GetTexture(std::string fileName_) { return m_ptr_tex_list[fileName_]; }
+	///**
+	//* @brief テクスチャ情報を取得
+	//* @return テクスチャ情報のポインタを返す
+	//*/
+	//t_Texture* GetTexture(std::string fileName_) { return m_ptr_tex_list[fileName_]; }
 
 
 	/**

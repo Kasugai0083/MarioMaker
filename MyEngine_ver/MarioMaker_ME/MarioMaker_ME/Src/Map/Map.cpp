@@ -23,15 +23,21 @@ void MapManager::Init() {
 	m_reader.GetMapCSV(m_map);
 	m_drawer2d.LoadTexture("Res/Game/Mapchip/block.png");
 	m_drawer2d.LoadTexture("Res/bomb.png");
+
+	// 
+
 }
 
 void MapManager::Draw() {
 	float pos_x = 0.f;
 	float pos_y = 0.f;
 
-	for (int i = 0; i < MAP_H; i++) {
-		for (int j = 0; j < MAP_W; j++) {
-			if (*m_map[i][j] == 1) {
+	for (int i = 0; i < MAP_H; i++) 
+	{
+		for (int j = 0; j < MAP_W; j++) 
+		{
+			if (*m_map[i][j] == 1)
+			{
 				pos_x = (float)j * MAP_CHIP_SIZE;
 				pos_y = (float)i * MAP_CHIP_SIZE;
 
@@ -50,6 +56,7 @@ void MapManager::Draw() {
 }
 
 void MapManager::Release() {
+	
 	m_drawer2d.AllRelease();
 
 	for (int i = 0; i < MAP_H; i++)
@@ -60,4 +67,11 @@ void MapManager::Release() {
 			m_map[i][j] = nullptr;
 		}
 	}
+
+	for(auto i : m_blocks)
+	{
+		delete i;
+		i = nullptr;
+	}
+
 }
