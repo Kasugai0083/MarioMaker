@@ -4,6 +4,7 @@
 #include "Engine/Graphics/Drawer2D.h"
 #include "Scene/SceneController.h"
 #include "Utility/Debug.h"
+#include "Data/Accessor.h"
 #include <string>
 #include <windows.h>
 #include <d3d9.h>
@@ -25,6 +26,10 @@ int APIENTRY WinMain(HINSTANCE ,HINSTANCE, LPSTR, INT)
 	// SceneController
 	SceneController::CreateInstance();
 	SceneController* scene_ctr = SceneController::GetInstance();
+
+	// Accessor
+	Accessor::CreateInstance();
+	Accessor* acs = Accessor::GetInstance();
 
 
 	if (!Device::MakeWindow(WIN_W,WIN_H,"MarioMaker_ME")) {
@@ -62,6 +67,7 @@ int APIENTRY WinMain(HINSTANCE ,HINSTANCE, LPSTR, INT)
 
 	dx_mgr->Release();
 
+	Accessor::DestroyInstance();
 	SceneController::DestroyInstance();
 	DxManager::DestroyInstance();
 

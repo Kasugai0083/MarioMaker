@@ -157,6 +157,7 @@
     <ClCompile Include="Src\Scene\Title\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Data\Accessor.h" />
     <ClInclude Include="Src\Data\GameData.h" />
     <ClInclude Include="Src\FileReader\FileReader.h" />
     <ClInclude Include="Src\Actor\Character\Player\Player.h" />
