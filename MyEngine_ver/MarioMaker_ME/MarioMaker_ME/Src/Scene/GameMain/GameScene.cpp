@@ -17,6 +17,8 @@ void GameScene::Init()
 
 void GameScene::Update() {
 
+	m_map_mgr.Update();
+
 	if (Device::KeyPress(VK_SPACE)) { m_state = SceneState::END; }
 }
 

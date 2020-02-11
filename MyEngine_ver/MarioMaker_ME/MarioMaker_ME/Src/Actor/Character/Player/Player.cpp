@@ -15,6 +15,7 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 	m_state.weight = 1.f;
 	m_state.speed = 3.f;
 	m_state.jump_power = 10.f;
+	m_state.grav_accel = 0.f;
 
 	m_state.curr_vec.x = 0.f;
 	m_state.curr_vec.y = 0.f;
@@ -26,9 +27,9 @@ void Player::Update()
 {
 	Accessor* acs = Accessor::GetInstance();
 
-	float gravity_power = acs->GetGravity() * m_state.weight;
+	m_state.grav_accel += acs->GetGravity() * m_state.weight;
 
-	m_state.pos.y += gravity_power;
+	m_state.pos.y += m_state.grav_accel;
 
 }
 

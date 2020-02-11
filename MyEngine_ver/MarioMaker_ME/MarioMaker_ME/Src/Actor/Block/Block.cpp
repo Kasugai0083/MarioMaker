@@ -16,6 +16,7 @@ void Block::Init(Pos2 pos_, std::string fileName_)
 	m_state.weight = 0.f;
 	m_state.speed = 0.f;
 	m_state.jump_power = 0.f;
+	m_state.grav_accel = 0.f;
 
 	m_state.curr_vec.x = 0.f;
 	m_state.curr_vec.y = 0.f;

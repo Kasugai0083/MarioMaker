@@ -8,6 +8,7 @@ typedef struct t_ActorState {
 	float weight;
 	float speed;
 	float jump_power;
+	float grav_accel;
 	t_Vec2 curr_vec;
 
 }t_ASta;
