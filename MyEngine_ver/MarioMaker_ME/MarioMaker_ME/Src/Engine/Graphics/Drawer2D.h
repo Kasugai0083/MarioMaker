@@ -1,8 +1,6 @@
 #pragma once
 
-#include "..//..//Utility/Vec2.h"
-#include "..//..//Utility/Vec3.h"
-#include "..//..//Utility/Size.h"
+
 #include "DirectX.h"
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -21,6 +19,11 @@ struct t_LineDesc;
 class Drawer2D
 {
 public:
+
+	~Drawer2D()
+	{
+		AllRelease();
+	}
 
 	/**
 	* @brief テクスチャを貼り付けたポリゴンを描画する

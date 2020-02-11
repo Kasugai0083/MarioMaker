@@ -1,5 +1,4 @@
 #include "Drawer2D.h"
-#include "DirectX.h"
 #include <vector>
 
 void Drawer2D::DrawTexture(t_VertexPos v_, std::string fileName_)
@@ -19,14 +18,17 @@ void Drawer2D::DrawTexture(t_VertexPos v_, std::string fileName_)
 		bottom_tv = (v_.tex_pos_start.y + v_.tex_pos_end.y) / m_ptr_tex_list[fileName_]->height;
 	}
 
+	float tex_width = v_.tex_pos_end.x - v_.tex_pos_start.x;
+	float tex_height = v_.tex_pos_end.y - v_.tex_pos_start.y;
+
 #if 1
 	// 左上原点
 	t_CustomVertex v[] =
 	{
-		{ v_.tex_pos_start.x, v_.tex_pos_start.y, 0.0f, 1.f, left_tu, top_tv},															// 左上
-		{(v_.tex_pos_start.x + v_.tex_pos_end.x), v_.tex_pos_start.y, 0.0f, 1.f, right_tu, top_tv},										// 右上
-		{(v_.tex_pos_start.x + v_.tex_pos_end.x), (v_.tex_pos_start.y + v_.tex_pos_end.y), 0.0f, 1.f, right_tu, bottom_tv },			// 右下
-		{ v_.tex_pos_start.x, (v_.tex_pos_start.y + v_.tex_pos_end.y), 0.0f, 1.f, left_tu, bottom_tv },									// 左下
+		{ v_.pos.x, v_.pos.y, 0.0f, 1.f, left_tu, top_tv},															// 左上
+		{(v_.pos.x + tex_width), v_.pos.y, 0.0f, 1.f, right_tu, top_tv},										// 右上
+		{(v_.pos.x + tex_width), (v_.pos.y + tex_height), 0.0f, 1.f, right_tu, bottom_tv },			// 右下
+		{ v_.pos.x, (v_.pos.y + tex_height), 0.0f, 1.f, left_tu, bottom_tv },									// 左下
 	};
 #else
 	// 中心点原点
@@ -67,7 +69,9 @@ void Drawer2D::DrawTexture(Pos2 pos_, std::string fileName_)
 	t_VertexPos tex_pos;
 	
 	if (m_ptr_tex_list[fileName_]) {
-		tex_pos.pos = pos_;
+		tex_pos.pos.x = pos_.x;
+		tex_pos.pos.y = pos_.y;
+
 		tex_pos.tex_pos_start = Pos2(0.f, 0.f);
 		tex_pos.tex_pos_end = Pos2(m_ptr_tex_list[fileName_]->width, m_ptr_tex_list[fileName_]->height);
 
@@ -161,9 +165,10 @@ void Drawer2D::Release(std::string fileName_) {
 void Drawer2D::AllRelease() {
 	for (auto tex : m_ptr_tex_list) 
 	{
-		if (!tex.second) {
+		if (tex.second) {
 			delete tex.second;
 			tex.second = nullptr;
 		}
 	}
+	m_ptr_tex_list.erase(m_ptr_tex_list.begin(),m_ptr_tex_list.end());
 }

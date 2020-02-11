@@ -101,7 +101,7 @@ void DxManager::EndDraw() {
 }
 
 void DxManager::Release() {
-	m_font->Release();
+	if (m_font) { m_font->Release(); }
 	m_dx_status.d3d_device->Release();
 	m_dx_status.d3d_interface->Release();
 	delete[] m_dx_status.d3d_present_param;

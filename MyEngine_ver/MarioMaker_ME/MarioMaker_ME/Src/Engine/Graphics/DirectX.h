@@ -139,7 +139,10 @@ private:
 	{ 
 		m_font = nullptr; 
 	};
-	virtual ~DxManager() {};
+	virtual ~DxManager() 
+	{
+		//Release();
+	};
 
 	DxManager(const DxManager&) = delete;
 	DxManager& operator=(const DxManager&) = delete;

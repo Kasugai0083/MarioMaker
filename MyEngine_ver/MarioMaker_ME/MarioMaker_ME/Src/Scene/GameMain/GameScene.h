@@ -2,6 +2,7 @@
 
 #include "../SceneBase.h"
 #include "../../Engine/Graphics/Drawer2D.h"
+#include "../..//Map/Map.h"
 
 
 /**
@@ -23,5 +24,6 @@ private:
 	void Draw()override;		//!< シーンの描画
 private:
 	Drawer2D m_drawer2d;			//!< フォント表示に使用
+	MapManager m_map_mgr;
 };
 

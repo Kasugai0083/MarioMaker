@@ -29,7 +29,7 @@ void FileReader::LoadCSV(std::string fileName_)
 	std::string str;
 
 	// CSV 幅分の配列を確保
-	double num[MAP_W];
+	int num[MAP_W];
 
 	int j = 0;
 
@@ -52,7 +52,6 @@ void FileReader::LoadCSV(std::string fileName_)
 		}
 		for (int i = 0; i < 40; i++)
 		{
-			// 値の代入と "," の追加
 			tmp_map[j][i] = num[i];
 		}
 		j++;
@@ -67,9 +66,6 @@ void FileReader::SaveCSV(std::string fileName_)
 
 	// 読み込んだファイルを string で受け取り
 	std::string str;
-
-	// CSV 幅分の配列を確保
-	double num[MAP_W];
 
 	// 1 行読み込み
 	// str に ifs から読み込んだ行を格納

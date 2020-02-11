@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Map/Map.h"
+#include "../Data/GameData.h"
 #include <string>
 
 
