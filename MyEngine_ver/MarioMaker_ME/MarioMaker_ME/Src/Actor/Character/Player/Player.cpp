@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "..//..//..//Data/Accessor.h"
 
 Player::~Player()
 {
@@ -23,6 +24,11 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 
 void Player::Update()
 {
+	Accessor* acs = Accessor::GetInstance();
+
+	float gravity_power = acs->GetGravity() * m_state.weight;
+
+	m_state.pos.y += gravity_power;
 
 }
 

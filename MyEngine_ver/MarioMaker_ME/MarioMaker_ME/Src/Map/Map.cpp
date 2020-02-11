@@ -39,20 +39,20 @@ void MapManager::Init() {
 			{
 				Pos2 chip_pos(pos_x, pos_y);
 
-				m_blocks.push_back(new Block(chip_pos, "Res/Game/Mapchip/block.png"));
+				m_actors.push_back(new Block(chip_pos, "Res/Game/Mapchip/block.png"));
 			}
 
 			if (*m_map[i][j] == 2)
 			{
 				Pos2 player_pos(pos_x, pos_y);
 
-				m_player.push_back(new Player(player_pos, "Res/Game/Mapchip/player.png"));
+				m_actors.push_back(new Player(player_pos, "Res/Game/Mapchip/player.png"));
 			}
 			if (*m_map[i][j] == 3)
 			{
 				Pos2 enemy_pos(pos_x, pos_y);
 
-				m_enemy.push_back(new Enemy(enemy_pos, "Res/Game/Mapchip/enemy.png"));
+				m_actors.push_back(new Enemy(enemy_pos, "Res/Game/Mapchip/enemy.png"));
 			}
 		}
 	}
@@ -61,21 +61,12 @@ void MapManager::Init() {
 
 void MapManager::Draw() {
 
-	for(auto i : m_blocks)
+	for(auto i : m_actors)
 	{
 		i->Draw("Res/Game/Mapchip/block.png");
-	}
-
-	for(auto i : m_player)
-	{
 		i->Draw("Res/Game/Mapchip/player.png");
-	}
-
-	for(auto i : m_enemy)
-	{
 		i->Draw("Res/Game/Mapchip/enemy.png");
 	}
-
 
 }
 
@@ -84,6 +75,11 @@ void MapManager::Update() {
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; };
 	acs->SetGravity(m_gravity);
+
+	for (auto i : m_actors)
+	{
+		i->Update();
+	}
 
 }
 
@@ -102,27 +98,11 @@ void MapManager::Release() {
 	}
 
 	// m_block‚Ì‰ð•ú
-	for(auto i : m_blocks)
+	for(auto i : m_actors)
 	{
 		delete i;
 		i = nullptr;
 	}
-	m_blocks.clear();
-
-	// m_player‚Ì‰ð•ú
-	for(auto i : m_player)
-	{
-		delete i;
-		i = nullptr;
-	}
-	m_player.clear();
-
-	// m_enemy‚Ì‰ð•ú
-	for(auto i : m_enemy)
-	{
-		delete i;
-		i = nullptr;
-	}
-	m_enemy.clear();
+	m_actors.clear();
 
 }

@@ -1,9 +1,8 @@
 #pragma once
+#include "..//Utility/Vec2.h"
+#include "..//Engine/Graphics/Drawer2D.h"
 
-#include "..//..//Utility/Vec2.h"
-#include "..//..//Engine/Graphics/Drawer2D.h"
-
-typedef struct t_CharcterState {
+typedef struct t_ActorState {
 
 	Pos2 pos;
 	float weight;
@@ -11,13 +10,13 @@ typedef struct t_CharcterState {
 	float jump_power;
 	t_Vec2 curr_vec;
 
-}t_CSta;
+}t_ASta;
 
-class CharacterBase
+class ActorBase
 {
 public:
-	CharacterBase() {};
-	virtual ~CharacterBase() {};
+	ActorBase() {};
+	virtual ~ActorBase() {};
 
 	virtual void Init(Pos2 pos_, std::string fileName_) = 0;
 	virtual void Update() = 0;
@@ -25,7 +24,7 @@ public:
 	virtual void Release() = 0;
 
 protected:
-	t_CharcterState m_state;
+	t_ActorState m_state;
 	Drawer2D m_drawer2d;
 };
 

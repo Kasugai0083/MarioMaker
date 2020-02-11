@@ -157,13 +157,13 @@
     <ClCompile Include="Src\Scene\Title\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Actor\ActorBase.h" />
     <ClInclude Include="Src\Data\Accessor.h" />
     <ClInclude Include="Src\Data\GameData.h" />
     <ClInclude Include="Src\FileReader\FileReader.h" />
     <ClInclude Include="Src\Actor\Character\Player\Player.h" />
     <ClInclude Include="Src\Actor\Character\Enemy\Enemy.h" />
     <ClInclude Include="Src\Actor\Block\Block.h" />
-    <ClInclude Include="Src\Actor\Character\CharacterBase.h" />
     <ClInclude Include="Src\Map\Map.h" />
     <ClInclude Include="Src\Engine\Device.h" />
     <ClInclude Include="Src\Engine\Graphics\DirectX.h" />

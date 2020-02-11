@@ -1,28 +1,24 @@
 #pragma once
 
-#include "..//..//Engine/Graphics/Drawer2D.h"
+#include "..//ActorBase.h"
 
-class Block
+class Block : public ActorBase
 {
 public:
 	Block(Pos2 pos_, std::string fileName_) 
 	{
 		Init(pos_,fileName_);
 	};
-	~Block();
+	~Block() override;
 
-	void Init(Pos2 pos_, std::string fileName_);
-	void Draw(std::string fileName_);
-	void Update();
-	void Release();
+	void Init(Pos2 pos_, std::string fileName_)override;
+	void Draw(std::string fileName_)override;
+	void Update()override;
+	void Release()override;
 
 private:
 
-	Pos2 m_pos;
-
 	float m_reaction; //!< @brief ”½ì—p‚Ì—Í
-
-	Drawer2D m_drawer2d;
 
 };
 

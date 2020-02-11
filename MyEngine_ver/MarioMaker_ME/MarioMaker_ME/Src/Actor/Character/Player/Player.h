@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../CharacterBase.h"
+#include "../../ActorBase.h"
 
 class Player :
-	public CharacterBase
+	public ActorBase
 {
 public:
 	Player(Pos2 pos_, std::string fileName_) { Init(pos_, fileName_); };

@@ -29,8 +29,7 @@ private:
 	int* m_map[23][40];
 	Drawer2D m_drawer2d;
 
-	std::vector<Block*> m_blocks;
-	std::vector<Player*> m_player;
-	std::vector<Enemy*> m_enemy;
+	std::vector<ActorBase*> m_actors;
+
 };
 

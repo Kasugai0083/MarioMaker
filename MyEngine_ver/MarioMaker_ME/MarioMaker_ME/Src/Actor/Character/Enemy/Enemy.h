@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../CharacterBase.h"
+#include "../../ActorBase.h"
 
 class Enemy :
-	public CharacterBase
+	public ActorBase
 {
 public:
 	Enemy(Pos2 pos_, std::string fileName_) { Init(pos_, fileName_); };
@@ -16,5 +16,7 @@ public:
 	void Draw(std::string fileName_) override;
 
 	void Release() override;
+private:
+
 };
 
