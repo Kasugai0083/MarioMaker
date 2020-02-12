@@ -27,7 +27,7 @@ void Player::Update()
 {
 	Accessor* acs = Accessor::GetInstance();
 
-	m_state.grav_accel += acs->GetGravity() * m_state.weight;
+	m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
 
 	m_state.pos.y += m_state.grav_accel;
 

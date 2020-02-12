@@ -6,12 +6,12 @@ class Accessor : public Singleton<Accessor>
 {
 public:
 
-	void SetGravity(float gravity_) 
+	void SetCurrGravity(float gravity_) 
 	{
 		m_gravity_data = gravity_;
 	}
 
-	float GetGravity() 
+	float GetCurrGravity() 
 	{
 		return m_gravity_data;
 	};

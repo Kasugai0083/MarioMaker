@@ -2,9 +2,8 @@
 
 #include "../Engine/Graphics/Drawer2D.h"
 #include "..//Data/GameData.h"
-#include "..//Actor/Block/Block.h"
-#include "..//Actor/Character/Player/Player.h"
-#include "..//Actor/Character/Enemy/Enemy.h"
+#include "../Actor/ActorManager.h"
+
 #include <vector>
 
 class MapManager
@@ -13,9 +12,9 @@ public:
 	MapManager()
 	{
 		Init();
-
 	};
 	~MapManager();
+
 	void Init();
 
 	void Update();
@@ -26,10 +25,6 @@ public:
 private:
 	float m_gravity;
 
-	int* m_map[23][40];
-	Drawer2D m_drawer2d;
-
-	std::vector<ActorBase*> m_actors;
-
+	ActorManager m_actor_mgr;
 };
 

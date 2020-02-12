@@ -28,7 +28,7 @@ void Block::Update()
 {
 	Accessor* acs = Accessor::GetInstance();
 
-	float gravity_power = acs->GetGravity() * m_state.weight;
+	float gravity_power = acs->GetCurrGravity() * m_state.weight;
 
 	m_state.pos.y += gravity_power;
 
