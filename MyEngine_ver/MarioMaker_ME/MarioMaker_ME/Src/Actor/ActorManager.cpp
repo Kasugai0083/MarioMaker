@@ -73,6 +73,22 @@ void ActorManager::Update()
 			j->Update();
 		}
 	}
+
+	for(auto block : m_actors["ブロック"])
+	{
+		for(auto player : m_actors["プレイヤー"])
+		{
+			if (
+				player->GetPos().y <= block->GetPos().y
+				&& player->GetPos().x == block->GetPos().x
+				) 
+			{
+				Pos2 test_pos(player->GetPos().x, block->GetPos().y - 64.f);
+				player->SetPos(test_pos);
+			}
+		}
+	}
+
 }
 
 void ActorManager::Release()

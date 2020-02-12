@@ -24,6 +24,9 @@ public:
 	virtual void Draw(std::string fileName_) = 0;
 	virtual void Release() = 0;
 
+	Pos2 GetPos() { return m_state.pos; }
+	void SetPos(Pos2 pos_) { m_state.pos = pos_; }
+
 protected:
 	t_ActorState m_state;
 	Drawer2D m_drawer2d;
