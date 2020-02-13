@@ -15,7 +15,7 @@ void ResultScene::Init() {
 void ResultScene::Update() {
 
 
-	if (Device::KeyPress(VK_SPACE)) { m_state = SceneState::END; }
+	if (Device::KeyPress(VK_RETURN)) { m_state = SceneState::END; }
 }
 
 SceneID ResultScene::End() {

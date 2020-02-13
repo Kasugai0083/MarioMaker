@@ -19,7 +19,7 @@ void GameScene::Update() {
 
 	m_map_mgr.Update();
 
-	if (Device::KeyPress(VK_SPACE)) { m_state = SceneState::END; }
+	if (Device::KeyPress(VK_RETURN)) { m_state = SceneState::END; }
 }
 
 SceneID GameScene::End() {

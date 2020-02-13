@@ -9,6 +9,7 @@ typedef struct t_ActorState {
 	float speed;
 	float jump_power;
 	float grav_accel;
+	bool is_jump;
 	t_Vec2 curr_vec;
 
 }t_ASta;
@@ -26,6 +27,10 @@ public:
 
 	Pos2 GetPos() { return m_state.pos; }
 	void SetPos(Pos2 pos_) { m_state.pos = pos_; }
+
+	void SetGrvAccel(float gravity_) { m_state.grav_accel = gravity_; }
+
+	void SetIsJump(bool jump_) { m_state.is_jump = jump_; }
 
 protected:
 	t_ActorState m_state;

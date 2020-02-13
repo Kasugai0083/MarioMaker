@@ -79,12 +79,17 @@ void ActorManager::Update()
 		for(auto player : m_actors["ƒvƒŒƒCƒ„["])
 		{
 			if (
-				player->GetPos().y <= block->GetPos().y
-				&& player->GetPos().x == block->GetPos().x
+				player->GetPos().y >= block->GetPos().y - 32.f
+				&& player->GetPos().x >= block->GetPos().x
+				&& player->GetPos().x <= block->GetPos().x + 32.f
 				) 
 			{
-				Pos2 test_pos(player->GetPos().x, block->GetPos().y - 64.f);
+				Pos2 test_pos(player->GetPos().x, block->GetPos().y - 32.f);
 				player->SetPos(test_pos);
+
+				player->SetIsJump(false);
+
+				//player->SetGrvAccel(0.f);
 			}
 		}
 	}

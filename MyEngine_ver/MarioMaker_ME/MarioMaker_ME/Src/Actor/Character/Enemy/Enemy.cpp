@@ -20,7 +20,7 @@ void Enemy::Init(Pos2 pos_, std::string fileName_)
 	m_state.curr_vec.x = 0.f;
 	m_state.curr_vec.y = 0.f;
 
-
+	m_state.is_jump = true;
 }
 
 void Enemy::Update()
