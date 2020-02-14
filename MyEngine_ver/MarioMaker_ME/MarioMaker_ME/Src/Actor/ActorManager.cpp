@@ -78,9 +78,6 @@ void ActorManager::Update()
 	// アクター全体の更新処理 end
 
 	// ブロックとプレイヤーの当たり start
-	float player_x = 0.f;
-	float player_y = 0.f;
-
 	for(auto block : m_actors["ブロック"])
 	{
 		for(auto player : m_actors["プレイヤー"])
@@ -92,8 +89,8 @@ void ActorManager::Update()
 				) 
 			{
 				
-				player_x = player->GetPos().x;
-				player_y = block->GetPos().y - 32.f;
+				float player_x = player->GetPos().x;
+				float player_y = block->GetPos().y - 32.f;
 				
 				Pos2 test_pos(player_x, player_y);
 				player->SetPos(test_pos);
@@ -104,7 +101,6 @@ void ActorManager::Update()
 			}
 		}
 	}
-
 	// ブロックとプレイヤーの当たり end
 
 

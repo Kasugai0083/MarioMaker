@@ -15,7 +15,7 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 
 	m_state.weight = 1.f;
 	m_state.speed = 3.f;
-	m_state.jump_power = 5.f;
+	m_state.jump_power = 3.f;
 	m_state.grav_accel = 0.f;
 
 	m_state.curr_vec.x = 0.f;
@@ -35,30 +35,45 @@ void Player::Update()
 	if (Device::KeyOn('A')) { m_state.pos.x -= m_state.speed; };
 	// 左右の移動処理 end
 
+	// 重力処理 start
 	// ジャンプ処理 start
 	static int count = 0;
+	static bool short_jump = false;
 	if (Device::KeyOn(VK_SPACE)
 		&& m_state.has_on_ground)
 	{
 
-
 		m_state.grav_accel = -m_state.jump_power;
 		m_state.has_on_ground = false;
-
+		short_jump = true;
 
 	};
+
+	if (Device::KeyOn(VK_SPACE)
+		&& short_jump 
+		&& count <= 120)
+
+	{
+		count++;
+		m_state.grav_accel = -m_state.jump_power;
+	}
+
+	if (Device::KeyOff(VK_SPACE)) 
+	{
+		short_jump = false;
+	}
+	// ジャンプ処理 end
 	if(m_state.has_on_ground)
 	{
 		m_state.grav_accel = 0.f;
+		short_jump = false;
 		count = 0;
 	}
 	else {
 		m_state.pos.y += m_state.grav_accel;
 		m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
 	}
-
-
-	// ジャンプ処理 end
+	// 重力処理 end
  
 }
 
