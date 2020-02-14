@@ -16,7 +16,6 @@ class MapManager
 public:
 	MapManager()	//!< コンストラクタ
 	{
-		Init();
 	};
 	~MapManager();	//!< デストラクタ
 

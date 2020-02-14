@@ -15,7 +15,7 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 
 	m_state.weight = 1.f;
 	m_state.speed = 3.f;
-	m_state.jump_power = 3.f;
+	m_state.jump_power = 5.f;
 	m_state.grav_accel = 0.f;
 
 	m_state.curr_vec.x = 0.f;
@@ -51,7 +51,7 @@ void Player::Update()
 
 	if (Device::KeyOn(VK_SPACE)
 		&& short_jump 
-		&& count <= 120)
+		&& count <= 20)
 
 	{
 		count++;

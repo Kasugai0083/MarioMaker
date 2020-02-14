@@ -4,7 +4,6 @@
 
 MapManager::~MapManager()
 {
-	Release();
 }
 
 void MapManager::Init() 

@@ -15,7 +15,6 @@ class ActorManager
 public:
 	ActorManager()	//!< コンストラクタ
 	{
-		Init();
 	}
 	~ActorManager() //!< デストラクタ
 	{
