@@ -2,6 +2,12 @@
 
 #include "../Utility/SingletonTemplate.h"
 
+/**
+* @brief
+* 値の一部を保存・提供するクラス\n
+* 現在テスト中！
+*/
+
 class Accessor : public Singleton<Accessor>
 {
 public:

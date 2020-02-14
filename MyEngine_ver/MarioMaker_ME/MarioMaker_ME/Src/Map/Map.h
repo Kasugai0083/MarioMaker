@@ -6,25 +6,27 @@
 
 #include <vector>
 
+/**
+* @brief
+* マップと登場するアクターを制御するクラス
+*/
+
 class MapManager
 {
 public:
-	MapManager()
+	MapManager()	//!< コンストラクタ
 	{
 		Init();
 	};
-	~MapManager();
+	~MapManager();	//!< デストラクタ
 
-	void Init();
+	void Init();	//!< 初期化
+	void Update();	//!< 更新
+	void Draw();	//!< 描画
+	void Release();	//!< 解放
 
-	void Update();
-
-	void Draw();
-
-	void Release();
 private:
-	float m_gravity;
-
-	ActorManager m_actor_mgr;
+	float m_gravity;			//!< マップの重力
+	ActorManager m_actor_mgr;	//!< アクターを管理
 };
 
