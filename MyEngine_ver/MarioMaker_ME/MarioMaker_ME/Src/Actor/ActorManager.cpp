@@ -1,6 +1,7 @@
 #include "ActorManager.h"
 #include "../FileReader/FileReader.h"
 #include "..//Engine/Device.h"
+#include "..//Utility/Calculator/Calculator.h"
 
 void ActorManager::Init() 
 {
@@ -82,23 +83,39 @@ void ActorManager::Update()
 	{
 		for(auto player : m_actors["プレイヤー"])
 		{
-			if (
-				player->GetPos().y >= block->GetPos().y - 32.f
-				&& player->GetPos().x >= block->GetPos().x
-				&& player->GetPos().x <= block->GetPos().x + 32.f
-				) 
+			// 上方処理
+			if (Calculator::UpSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE)) 
 			{
 				
 				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y - 32.f;
+				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
 				
-				Pos2 test_pos(player_x, player_y);
-				player->SetPos(test_pos);
-
+				player->SetPos(Pos2(player_x, player_y));
 				
 				player->SetHasOnGround(true);
 				
 			}
+			// 左方処理
+			if (Calculator::LeftSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE))
+			{
+
+				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+
+			}
+			// 右方処理
+			if (Calculator::RightSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE))
+			{
+
+				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+
+			}
+
 		}
 	}
 	// ブロックとプレイヤーの当たり end
