@@ -79,22 +79,12 @@ void ActorManager::Update()
 	// アクター全体の更新処理 end
 
 	// ブロックとプレイヤーの当たり start
+	Pos2 curr_block(0.f, 0.f);
+
 	for(auto block : m_actors["ブロック"])
 	{
 		for(auto player : m_actors["プレイヤー"])
 		{
-			// 上方処理
-			if (Calculator::UpSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE)) 
-			{
-				
-				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
-				
-				player->SetPos(Pos2(player_x, player_y));
-				
-				player->SetHasOnGround(true);
-				
-			}
 			// 左方処理
 			if (Calculator::LeftSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE))
 			{
@@ -115,7 +105,24 @@ void ActorManager::Update()
 				player->SetPos(Pos2(player_x, player_y));
 
 			}
+			// 上方処理
+			if (Calculator::UpSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE)) 
+			{
+				
+				float player_x = player->GetPos().x;
+				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
+				
+				player->SetPos(Pos2(player_x, player_y));
+				
+				player->SetHasOnGround(true);
+				
+				curr_block = block->GetPos();
 
+			}
+			if (!Calculator::UpSideCollision(player->GetPos(), curr_block, MAP_CHIP_SIZE))
+			{
+				player->SetHasOnGround(false);
+			}
 		}
 	}
 	// ブロックとプレイヤーの当たり end
