@@ -14,7 +14,7 @@ typedef struct t_ActorState {
 	float speed;		//!< 速度
 	float jump_power;	//!< ジャンプ力
 	float grav_accel;	//!< 重力加速度
-	bool is_jump;		//!< ジャンプフラグ？
+	bool has_on_ground;		//!< ジャンプフラグ？
 	t_Vec2 curr_vec;	//!< 現在のベクトル情報
 
 }t_ASta;
@@ -34,8 +34,10 @@ public:
 	void SetPos(Pos2 pos_) { m_state.pos = pos_; }				//!< 座標変更
 
 	void SetGrvAccel(float gravity_) { m_state.grav_accel = gravity_; }	//!< 重力加速度変更
+	float GetGrvAccel() { return m_state.grav_accel; }					//!< 重力加速度の取得
 
-	void SetIsJump(bool jump_) { m_state.is_jump = jump_; }		//!< ジャンプフラグ変更
+	void SetHasOnGround(bool has_) { m_state.has_on_ground = has_; }	//!< ジャンプフラグ変更
+	float GetHasOnGround() { return m_state.has_on_ground; }			//!< ジャンプフラグの取得
 
 protected:
 	t_ActorState m_state;		//!< アクターのステータス

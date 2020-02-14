@@ -1,5 +1,6 @@
 #include "ActorManager.h"
 #include "../FileReader/FileReader.h"
+#include "..//Engine/Device.h"
 
 void ActorManager::Init() 
 {
@@ -66,13 +67,19 @@ void ActorManager::Draw()
 // 参照 => チェルノブイリ実験場
 void ActorManager::Update()
 {
-	for(auto i : m_actors)
+	// アクター全体の更新処理 start
+	for (auto i : m_actors)
 	{
-		for(auto j : m_actors[i.first])
+		for (auto j : m_actors[i.first])
 		{
 			j->Update();
 		}
 	}
+	// アクター全体の更新処理 end
+
+	// ブロックとプレイヤーの当たり start
+	float player_x = 0.f;
+	float player_y = 0.f;
 
 	for(auto block : m_actors["ブロック"])
 	{
@@ -84,15 +91,22 @@ void ActorManager::Update()
 				&& player->GetPos().x <= block->GetPos().x + 32.f
 				) 
 			{
-				Pos2 test_pos(player->GetPos().x, block->GetPos().y - 32.f);
+				
+				player_x = player->GetPos().x;
+				player_y = block->GetPos().y - 32.f;
+				
+				Pos2 test_pos(player_x, player_y);
 				player->SetPos(test_pos);
 
-				player->SetIsJump(false);
-
-				//player->SetGrvAccel(0.f);
+				
+				player->SetHasOnGround(true);
+				
 			}
 		}
 	}
+
+	// ブロックとプレイヤーの当たり end
+
 
 }
 
