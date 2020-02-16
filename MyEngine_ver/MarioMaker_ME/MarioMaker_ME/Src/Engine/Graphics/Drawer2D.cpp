@@ -149,7 +149,7 @@ void Drawer2D::DrawFont(t_Vec2 pos_,std::string text_) {
 		-1,
 		&rect,
 		DT_LEFT,
-		D3DCOLOR_XRGB(255,255,255)
+		D3DCOLOR_XRGB(0,0,0)
 	);
 }
 

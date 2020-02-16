@@ -1,46 +1,60 @@
 #include "Calculator.h"
 #include "..//..//Engine/Device.h"
 
-bool Calculator::UpSideCollision(Pos2 obj1_, Pos2 obj2_, float chipSize_)
+// ˆê‚Â‚Ã‚Â”»’è‚ðŽæ‚é•û–@‚ð„§
+
+bool Calculator::RectCollision(Pos2 obj1_, Pos2 obj2_, float chipSize_)
 {
+	Pos2 obj1_center;
+	obj1_center.x = obj1_.x / 2.f;
+	obj1_center.y = obj1_.y / 2.f;
+
+	Pos2 obj2_center;
+	obj2_center.x = obj2_.x / 2.f;
+	obj2_center.y = obj2_.y / 2.f;
+
 	if(
-		obj1_.y >= obj2_.y - chipSize_		
-		&& obj1_.y <= obj2_.y
-		&& obj1_.x >= obj2_.x
-		&& obj1_.x <= obj2_.x + chipSize_
+		obj1_center.y >= obj2_center.y - (chipSize_ / 2.f)
+		&& obj1_center.y <= obj2_center.y + (chipSize_ / 2.f)
+		&& obj1_center.x <= obj2_center.x + (chipSize_ / 2.f)
+		&& obj1_center.x >= obj2_center.x - (chipSize_ / 2.f)
 		)
 	{
+
 		return true;
+		
 	}
 	return false;
 }
 
-bool Calculator::LeftSideCollision(Pos2 obj1_, Pos2 obj2_, float chipSize_)
+PowKind Calculator::SerchUpDown(Pos2 obj1_, Pos2 obj2_, float chipSize_, t_Vec2 vec_)
 {
-	if (
-		Device::KeyOn('D')
-		&& obj1_.y >= obj2_.y
-		&& obj1_.y <= obj2_.y + chipSize_
-		&& obj1_.x + chipSize_ >= obj2_.x
-		&& obj1_.x + chipSize_ <= obj2_.x + chipSize_
-		)
+	if(RectCollision(obj1_, obj2_, chipSize_))
 	{
-		return true;
+		if (vec_.y < 0)
+		{
+			return PowKind::UP;
+		}
+		else if (vec_.y > 0)
+		{
+			return PowKind::DOWN;
+		}
 	}
-	return false;
+	return PowKind::NONE;
 }
 
-bool Calculator::RightSideCollision(Pos2 obj1_, Pos2 obj2_, float chipSize_)
+PowKind Calculator::SerchRightLeft(Pos2 obj1_, Pos2 obj2_, float chipSize_, t_Vec2 vec_)
 {
-	if (
-		Device::KeyOn('A')
-		&& obj1_.y >= obj2_.y
-		&& obj1_.y <= obj2_.y + chipSize_
-		&& obj1_.x >= obj2_.x
-		&& obj1_.x <= obj2_.x + chipSize_
-		)
+	if(RectCollision(obj1_, obj2_, chipSize_))
 	{
-		return true;
+		if (vec_.x < 0)
+		{
+			return PowKind::LEFT;
+		}
+		else if (vec_.x > 0)
+		{
+			return PowKind::RIGHT;
+		}
 	}
-	return false;
+	return PowKind::NONE;
 }

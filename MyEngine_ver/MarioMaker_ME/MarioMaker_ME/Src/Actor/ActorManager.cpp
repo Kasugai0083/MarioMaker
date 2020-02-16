@@ -85,8 +85,42 @@ void ActorManager::Update()
 	{
 		for(auto player : m_actors["プレイヤー"])
 		{
+			// 上方処理
+			if (Calculator::SerchUpDown(
+				player->GetPos(),
+				block->GetPos(),
+				MAP_CHIP_SIZE,
+				player->GetCurrVec())
+				== PowKind::DOWN)
+			{
+
+				float player_x = player->GetPos().x;
+				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
+
+				player->SetPos(Pos2(player_x, player_y));
+
+				player->SetHasOnGround(true);
+
+				curr_block = block->GetPos();
+
+			}
+			//else if (Calculator::SerchUpDown(
+			//	player->GetPos(),
+			//	block->GetPos(),
+			//	MAP_CHIP_SIZE,
+			//	player->GetCurrVec())
+			//	== PowKind::NONE)
+			//{
+			//	player->SetHasOnGround(false);
+			//}
+
 			// 左方処理
-			if (Calculator::LeftSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE))
+			if (Calculator::SerchRightLeft(
+				player->GetPos(),
+				block->GetPos(),
+				MAP_CHIP_SIZE,
+				player->GetCurrVec())
+				== PowKind::RIGHT)
 			{
 
 				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
@@ -96,7 +130,12 @@ void ActorManager::Update()
 
 			}
 			// 右方処理
-			if (Calculator::RightSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE))
+			else if (Calculator::SerchRightLeft(
+				player->GetPos(),
+				block->GetPos(),
+				MAP_CHIP_SIZE,
+				player->GetCurrVec())
+				== PowKind::LEFT) 
 			{
 
 				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
@@ -105,24 +144,21 @@ void ActorManager::Update()
 				player->SetPos(Pos2(player_x, player_y));
 
 			}
-			// 上方処理
-			if (Calculator::UpSideCollision(player->GetPos(), block->GetPos(), MAP_CHIP_SIZE)) 
-			{
-				
-				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
-				
-				player->SetPos(Pos2(player_x, player_y));
-				
-				player->SetHasOnGround(true);
-				
-				curr_block = block->GetPos();
 
-			}
-			if (!Calculator::UpSideCollision(player->GetPos(), curr_block, MAP_CHIP_SIZE))
-			{
-				player->SetHasOnGround(false);
-			}
+
+
+			//else if (Calculator::SerchUpDown(
+			//	player->GetPos(),
+			//	block->GetPos(),
+			//	MAP_CHIP_SIZE,
+			//	player->GetCurrVec())
+			//	== PowKind::DOWN)
+			//{
+			//	float player_x = player->GetPos().x;
+			//	float player_y = block->GetPos().y + MAP_CHIP_SIZE;
+
+			//	player->SetPos(Pos2(player_x, player_y));
+			//}
 		}
 	}
 	// ブロックとプレイヤーの当たり end

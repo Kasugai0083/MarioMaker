@@ -38,6 +38,43 @@ typedef struct t_Vec2
 		this->y = size.y;
 	}
 
+	t_Vec2 operator + (const t_Vec2& siz_)
+	{
+		t_Vec2 val;
+		val.x = this->x + siz_.x;
+		val.y = this->y + siz_.y;
+		return val;
+	}
+	t_Vec2 operator - (const t_Vec2& siz_)
+	{
+		t_Vec2 val;
+		val.x = this->x - siz_.x;
+		val.y = this->y - siz_.y;
+		return val;
+	}
+	t_Vec2 operator * (const t_Vec2& siz_)
+	{
+		t_Vec2 val;
+		val.x = this->x * siz_.x;
+		val.y = this->y * siz_.y;
+		return val;
+	}
+	t_Vec2 operator / (const t_Vec2& siz_)
+	{
+		t_Vec2 val;
+		val.x = this->x / siz_.x;
+		val.y = this->y / siz_.y;
+		return val;
+	}
+
+
+	t_Vec2& operator += (const t_Vec2& siz_)
+	{
+		this->x += siz_.x;
+		this->y += siz_.y;
+		return *this;
+	}
+
 	float x;	//!< X’l
 	float y;	//!< Y’l
 }Pos2;

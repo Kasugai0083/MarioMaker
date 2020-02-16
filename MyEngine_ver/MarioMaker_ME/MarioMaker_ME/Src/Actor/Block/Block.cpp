@@ -20,6 +20,8 @@ void Block::Init(Pos2 pos_, std::string fileName_)
 
 	m_state.curr_vec.x = 0.f;
 	m_state.curr_vec.y = 0.f;
+	m_state.old_pos.x = 0.f;
+	m_state.old_pos.y = 0.f;
 
 	m_state.has_on_ground = false;
 
