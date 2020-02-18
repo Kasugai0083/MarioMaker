@@ -29,14 +29,17 @@ class Calculator
 {
 public:
 	/**
+	* élï™äÑ
+	*/
+	static bool ForceRectCollision(t_ASta obj1_, t_ASta obj2_);
+public:
+	/**
 	* êVÇµÇ¢èàóù
 	*/
 	static bool UpSideCollision(t_ASta actor1_, t_ASta actor2_);
 	static bool LeftSideCollision(t_ASta actor1_, t_ASta actor2_);
 	static bool RightSideCollision(t_ASta actor1_, t_ASta actor2_);
 	static bool UnderSideCollision(t_ASta actor1_, t_ASta actor2_);
-	static bool UpSideCollision(Pos2 actor1_, Pos2 actor2_, float chipSize_);
-
 
 public:
 	/**

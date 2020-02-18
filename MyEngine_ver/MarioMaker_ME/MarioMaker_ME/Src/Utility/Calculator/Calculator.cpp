@@ -4,6 +4,35 @@
 // ˆê‚Â‚Ã‚Â”»’è‚ğæ‚é•û–@‚ğ„§
 
 /**
+* l•ªŠ„
+*/
+bool Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
+{
+	Pos2 obj1_center;
+	Pos2 obj1_half;
+
+	obj1_half.x = (obj1_.size.width / 2.f);
+	obj1_half.y = (obj1_.size.height / 2.f);
+
+	obj1_center.x = obj1_.pos.x + (obj1_.size.width / 2.f);
+	obj1_center.y = obj1_.pos.y + (obj1_.size.height / 2.f);
+
+	Pos2 obj2_center;
+	obj2_center.x = obj2_.pos.x + (obj2_.size.width / 2.f);
+	obj2_center.y = obj2_.pos.y + (obj2_.size.height / 2.f);
+
+	if (
+		obj1_center.y >= obj2_center.y
+		)
+	{
+
+		return true;
+
+	}
+	return false;
+}
+
+/**
 * V‚µ‚¢ˆ—
 */
 bool Calculator::UpSideCollision(t_ASta actor1_, t_ASta actor2_)
