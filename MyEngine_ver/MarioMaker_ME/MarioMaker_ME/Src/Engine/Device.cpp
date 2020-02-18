@@ -14,7 +14,6 @@ namespace {
 	bool is_drag = false; //ドラッグ判定変数
 	bool is_click = false;//ダブルクリック判定変数
 
-
 	/**
 	* キーボード関連
 	*/
@@ -67,6 +66,7 @@ LRESULT CALLBACK WindowProc(HWND windowHandle_, UINT messageId_, WPARAM wParam_,
 		// マウスボタンクリック終了時
 	case WM_LBUTTONUP:
 		is_click = false;
+
 		pt.end = { 0,0 };
 		break;
 
@@ -199,9 +199,29 @@ namespace Device{
 		return vec;
 	}
 	
-	const bool HasClickOnMouse() {
-		if (is_click) {	return true;}
+	const bool MouseOn() 
+	{
+		
+		if (is_click)
+		{
+			return true;
+		}
+			
 		return false;
+		
+	}
+	
+	const bool MousePress() 
+	{
+		
+		if (is_click)
+		{
+			is_click = false;
+			return true;
+		}
+			
+		return false;
+		
 	}
 }
 

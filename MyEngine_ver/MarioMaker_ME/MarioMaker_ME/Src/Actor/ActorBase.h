@@ -1,6 +1,7 @@
 #pragma once
 #include "..//Utility/Vec2.h"
 #include "..//Engine/Graphics/Drawer2D.h"
+#include "../Data/GameData.h"
 
 /**
 * @brief 
@@ -11,6 +12,7 @@ typedef struct t_ActorState {
 
 	Pos2 pos;			//!< 座標
 	Pos2 old_pos;		//!< 古い座標情報(計算用)
+	t_Size size;		//!< サイズ
 	float weight;		//!< 重さ
 	float speed;		//!< 速度
 	float jump_power;	//!< ジャンプ力
@@ -41,6 +43,8 @@ public:
 	float GetHasOnGround() { return m_state.has_on_ground; }			//!< ジャンプフラグの取得
 
 	t_Vec2 GetCurrVec() { return m_state.curr_vec; }			//!< ジャンプフラグの取得
+
+	t_ASta GetState() { return m_state; }			//!< ジャンプフラグの取得
 
 protected:
 	t_ActorState m_state;		//!< アクターのステータス

@@ -81,17 +81,41 @@ void ActorManager::Update()
 	// ブロックとプレイヤーの当たり start
 	Pos2 curr_block(0.f, 0.f);
 
-	for(auto block : m_actors["ブロック"])
+	for (auto block : m_actors["ブロック"])
 	{
-		for(auto player : m_actors["プレイヤー"])
+		for (auto player : m_actors["プレイヤー"])
 		{
+			// 左方処理
+			if (Calculator::LeftSideCollision(player->GetState(), block->GetState()))
+			{
+
+				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+			}
+			// 右方処理
+			else if (Calculator::RightSideCollision(player->GetState(), block->GetState()))
+			{
+
+				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+
+			}
+			// 下方処理
+			else if (Calculator::UnderSideCollision(player->GetState(), block->GetState()))
+			{
+
+				float player_x = player->GetPos().x;
+				float player_y = block->GetPos().y + MAP_CHIP_SIZE;
+
+				player->SetPos(Pos2(player_x, player_y));
+				player->SetGrvAccel(0.f);
+			}
 			// 上方処理
-			if (Calculator::SerchUpDown(
-				player->GetPos(),
-				block->GetPos(),
-				MAP_CHIP_SIZE,
-				player->GetCurrVec())
-				== PowKind::DOWN)
+			else if (Calculator::UpSideCollision(player->GetState(), block->GetState()))
 			{
 
 				float player_x = player->GetPos().x;
@@ -104,6 +128,11 @@ void ActorManager::Update()
 				curr_block = block->GetPos();
 
 			}
+			//else
+			//{
+			//	player->SetHasOnGround(false);
+			//}
+
 			//else if (Calculator::SerchUpDown(
 			//	player->GetPos(),
 			//	block->GetPos(),
@@ -114,37 +143,8 @@ void ActorManager::Update()
 			//	player->SetHasOnGround(false);
 			//}
 
-			// 左方処理
-			if (Calculator::SerchRightLeft(
-				player->GetPos(),
-				block->GetPos(),
-				MAP_CHIP_SIZE,
-				player->GetCurrVec())
-				== PowKind::RIGHT)
-			{
 
-				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
-
-				player->SetPos(Pos2(player_x, player_y));
-
-			}
-			// 右方処理
-			else if (Calculator::SerchRightLeft(
-				player->GetPos(),
-				block->GetPos(),
-				MAP_CHIP_SIZE,
-				player->GetCurrVec())
-				== PowKind::LEFT) 
-			{
-
-				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
-
-				player->SetPos(Pos2(player_x, player_y));
-
-			}
-
+			//}
 
 
 			//else if (Calculator::SerchUpDown(
@@ -162,8 +162,7 @@ void ActorManager::Update()
 		}
 	}
 	// ブロックとプレイヤーの当たり end
-
-
+	
 }
 
 void ActorManager::Release()

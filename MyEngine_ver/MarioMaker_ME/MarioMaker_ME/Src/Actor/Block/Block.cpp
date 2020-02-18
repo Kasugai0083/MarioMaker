@@ -1,5 +1,4 @@
 #include "Block.h"
-#include "..//..//Data/GameData.h"
 #include "..//..//Data/Accessor.h"
 
 Block::~Block()
@@ -12,6 +11,9 @@ void Block::Init(Pos2 pos_, std::string fileName_)
 
 	m_state.pos.x = pos_.x;
 	m_state.pos.y = pos_.y;
+
+	m_state.size.height = MAP_CHIP_SIZE;
+	m_state.size.width = MAP_CHIP_SIZE;
 
 	m_state.weight = 0.f;
 	m_state.speed = 0.f;
