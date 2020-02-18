@@ -85,6 +85,7 @@ void ActorManager::Update()
 	{
 		for (auto player : m_actors["プレイヤー"])
 		{
+
 			// 左方処理
 			if (Calculator::LeftSideCollision(player->GetState(), block->GetState()))
 			{
@@ -113,6 +114,7 @@ void ActorManager::Update()
 
 				player->SetPos(Pos2(player_x, player_y));
 				player->SetGrvAccel(0.f);
+
 			}
 			// 上方処理
 			else if (Calculator::UpSideCollision(player->GetState(), block->GetState()))
@@ -126,39 +128,13 @@ void ActorManager::Update()
 				player->SetHasOnGround(true);
 
 				curr_block = block->GetPos();
-
+				
 			}
-			//else
+			//else if (!Calculator::UpSideCollision(player->GetState(), block->GetState()))
 			//{
 			//	player->SetHasOnGround(false);
 			//}
 
-			//else if (Calculator::SerchUpDown(
-			//	player->GetPos(),
-			//	block->GetPos(),
-			//	MAP_CHIP_SIZE,
-			//	player->GetCurrVec())
-			//	== PowKind::NONE)
-			//{
-			//	player->SetHasOnGround(false);
-			//}
-
-
-			//}
-
-
-			//else if (Calculator::SerchUpDown(
-			//	player->GetPos(),
-			//	block->GetPos(),
-			//	MAP_CHIP_SIZE,
-			//	player->GetCurrVec())
-			//	== PowKind::DOWN)
-			//{
-			//	float player_x = player->GetPos().x;
-			//	float player_y = block->GetPos().y + MAP_CHIP_SIZE;
-
-			//	player->SetPos(Pos2(player_x, player_y));
-			//}
 		}
 	}
 	// ブロックとプレイヤーの当たり end

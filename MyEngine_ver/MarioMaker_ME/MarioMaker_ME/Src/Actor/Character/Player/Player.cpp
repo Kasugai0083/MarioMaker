@@ -95,6 +95,8 @@ void Player::Update()
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
 	// ベクトルの計算 end
 
+	m_state.has_on_ground = false;
+
 }
 
 void Player::Draw(std::string fileName_)

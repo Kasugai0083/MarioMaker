@@ -35,6 +35,7 @@ public:
 	static bool LeftSideCollision(t_ASta actor1_, t_ASta actor2_);
 	static bool RightSideCollision(t_ASta actor1_, t_ASta actor2_);
 	static bool UnderSideCollision(t_ASta actor1_, t_ASta actor2_);
+	static bool UpSideCollision(Pos2 actor1_, Pos2 actor2_, float chipSize_);
 
 
 public:
@@ -56,4 +57,3 @@ public:
 private:
 	static float x, y;
 };
-
