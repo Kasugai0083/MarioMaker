@@ -85,7 +85,7 @@ void ActorManager::Update()
 	{
 		for (auto player : m_actors["プレイヤー"])
 		{
-
+#if 1
 			// 左方処理
 			if (Calculator::LeftSideCollision(player->GetState(), block->GetState()))
 			{
@@ -94,6 +94,8 @@ void ActorManager::Update()
 				float player_y = player->GetPos().y;
 
 				player->SetPos(Pos2(player_x, player_y));
+				
+
 			}
 			// 右方処理
 			else if (Calculator::RightSideCollision(player->GetState(), block->GetState()))
@@ -127,13 +129,65 @@ void ActorManager::Update()
 
 				player->SetHasOnGround(true);
 
-				curr_block = block->GetPos();
-				
 			}
-			//else if (!Calculator::UpSideCollision(player->GetState(), block->GetState()))
-			//{
-			//	player->SetHasOnGround(false);
-			//}
+#else
+			/**
+			* 古い処理
+			*/
+			if (Calculator::SerchUpDown(
+				player->GetPos(),
+				block->GetPos(),
+				MAP_CHIP_SIZE,
+				player->GetCurrVec()
+			) == PowKind::DOWN)
+			{
+				float player_x = player->GetPos().x;
+				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
+
+				player->SetPos(Pos2(player_x, player_y));
+
+				player->SetHasOnGround(true);
+
+			}
+			else if (Calculator::SerchUpDown(
+				player->GetPos(),
+				block->GetPos(),
+				MAP_CHIP_SIZE,
+				player->GetCurrVec()
+			) == PowKind::UP)
+			{
+				float player_x = player->GetPos().x;
+				float player_y = block->GetPos().y + MAP_CHIP_SIZE;
+
+				player->SetPos(Pos2(player_x, player_y));
+				player->SetGrvAccel(0.f);
+			}
+			else if (Calculator::SerchRightLeft(
+				player->GetPos(),
+				block->GetPos(),
+				MAP_CHIP_SIZE,
+				player->GetCurrVec()
+			) == PowKind::LEFT)
+			{
+				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+			}
+			else if (Calculator::SerchRightLeft(
+				player->GetPos(),
+				block->GetPos(),
+				MAP_CHIP_SIZE,
+				player->GetCurrVec()
+			) == PowKind::RIGHT)
+			{
+				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+			}
+#endif
+
 
 		}
 	}

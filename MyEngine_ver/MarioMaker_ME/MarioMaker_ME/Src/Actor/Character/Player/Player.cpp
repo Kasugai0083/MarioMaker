@@ -108,9 +108,12 @@ void Player::Draw(std::string fileName_)
 	player_posx_txt += std::to_string(m_state.pos.x);
 	std::string player_posy_txt = "プレイヤーのY座標 => ";
 	player_posy_txt += std::to_string(m_state.pos.y);
+	std::string player_grv_txt = "重力加速度 => ";
+	player_grv_txt += std::to_string(m_state.grav_accel);
 
 	m_drawer2d.DrawFont(Pos2(100.f, 100.f), player_posx_txt);
 	m_drawer2d.DrawFont(Pos2(100.f, 150.f), player_posy_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 200.f), player_grv_txt);
 	// プレイヤー座標を表示 end
 
 }
