@@ -5,6 +5,11 @@
 #include "Engine/Graphics.h"
 #include "Engine/Lib/Lib.h"
 #include <Windows.h>
+#include <cstdlib>
+#include <crtdbg.h>
+
+#define _CRTDBG_MAP_ALLOC
+#define new  ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
 
 int WINAPI WinMain(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -47,7 +52,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 				UpdateScene();
 
-
+				_CrtDumpMemoryLeaks();
 			}
 		}
 		EndEngine();

@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{0C57D567-434C-481B-A9CB-C1C97A7430B7}</ProjectGuid>
-    <RootNamespace>MarioMaker</RootNamespace>
+    <ProjectGuid>{863BA2A8-9AE2-435E-A37C-4B3C59EDF9B2}</ProjectGuid>
+    <RootNamespace>MarioMakerME</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,37 +142,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Engine\Calculation.cpp" />
-    <ClCompile Include="Src\Engine\Engine.cpp" />
-    <ClCompile Include="Src\Engine\Graphics.cpp" />
-    <ClCompile Include="Src\Engine\Input.cpp" />
-    <ClCompile Include="Src\Engine\Lib\Device.cpp" />
-    <ClCompile Include="Src\Engine\Lib\M_Texture.cpp" />
-    <ClCompile Include="Src\Engine\Window.cpp" />
-    <ClCompile Include="Src\Main.cpp" />
-    <ClCompile Include="Src\Scene\ClearScene.cpp" />
-    <ClCompile Include="Src\Scene\GameScene.cpp" />
-    <ClCompile Include="Src\Scene\Scene.cpp" />
-    <ClCompile Include="Src\Scene\TitleScene.cpp" />
-    <ClCompile Include="Src\Texture\Texture.cpp" />
-    <ClCompile Include="Src\Utility\Common.cpp" />
+    <ClCompile Include="Src\Utility\Calculator\Calculator.cpp" />
+    <ClCompile Include="Src\Actor\ActorManager.cpp" />
+    <ClCompile Include="Src\FileReader\FileReader.cpp" />
+    <ClCompile Include="Src\Actor\Character\Player\Player.cpp" />
+    <ClCompile Include="Src\Actor\Character\Enemy\Enemy.cpp" />
+    <ClCompile Include="Src\Actor\Block\Block.cpp" />
+    <ClCompile Include="Src\Map\Map.cpp" />
+    <ClCompile Include="Src\Engine\Device.cpp" />
+    <ClCompile Include="Src\Engine\Graphics\DirectX.cpp" />
+    <ClCompile Include="Src\Engine\Graphics\Drawer2D.cpp" />
+    <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Scene\GameMain\GameScene.cpp" />
+    <ClCompile Include="Src\Scene\Result\ResultScene.cpp" />
+    <ClCompile Include="Src\Scene\SceneController.cpp" />
+    <ClCompile Include="Src\Scene\Title\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Engine\Calculation.h" />
-    <ClInclude Include="Src\Engine\Engine.h" />
-    <ClInclude Include="Src\Engine\Graphics.h" />
-    <ClInclude Include="Src\Engine\Input.h" />
-    <ClInclude Include="Src\Engine\Lib\Lib.h" />
-    <ClInclude Include="Src\Engine\Window.h" />
-    <ClInclude Include="Src\Scene\ClearScene.h" />
-    <ClInclude Include="Src\Scene\GameScene.h" />
-    <ClInclude Include="Src\Scene\Scene.h" />
-    <ClInclude Include="Src\Scene\TitleScene.h" />
-    <ClInclude Include="Src\Texture\Texture.h" />
-    <ClInclude Include="Src\Utility\Common.h" />
+    <ClInclude Include="Src\Utility\Calculator\Calculator.h" />
+    <ClInclude Include="Src\Actor\ActorBase.h" />
+    <ClInclude Include="Src\Actor\ActorManager.h" />
+    <ClInclude Include="Src\Data\Accessor.h" />
+    <ClInclude Include="Src\Data\GameData.h" />
+    <ClInclude Include="Src\FileReader\FileReader.h" />
+    <ClInclude Include="Src\Actor\Character\Player\Player.h" />
+    <ClInclude Include="Src\Actor\Character\Enemy\Enemy.h" />
+    <ClInclude Include="Src\Actor\Block\Block.h" />
+    <ClInclude Include="Src\Map\Map.h" />
+    <ClInclude Include="Src\Engine\Device.h" />
+    <ClInclude Include="Src\Engine\Graphics\DirectX.h" />
+    <ClInclude Include="Src\Engine\Graphics\Drawer2D.h" />
+    <ClInclude Include="Src\Scene\GameMain\GameScene.h" />
+    <ClInclude Include="Src\Scene\Result\ResultScene.h" />
+    <ClInclude Include="Src\Scene\SceneBase.h" />
+    <ClInclude Include="Src\Scene\SceneController.h" />
+    <ClInclude Include="Src\Scene\SceneID.h" />
+    <ClInclude Include="Src\Scene\Title\TitleScene.h" />
+    <ClInclude Include="Src\Utility\Debug.h" />
     <ClInclude Include="Src\Utility\SingletonTemplate.h" />
     <ClInclude Include="Src\Utility\Size.h" />
-    <ClInclude Include="Src\Utility\Vec.h" />
+    <ClInclude Include="Src\Utility\Vec2.h" />
+    <ClInclude Include="Src\Utility\Vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

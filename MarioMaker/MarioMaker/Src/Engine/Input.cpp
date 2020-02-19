@@ -209,6 +209,7 @@ bool GetKeyUp(KEY_INFO key)
 void UpdateInput()
 {
 	UpdateMouse();
+	KeyStateUpdate();
 
 	g_PrevMouseState = g_CurrentMouseState;
 	// マウスの状態を取得します
@@ -258,7 +259,7 @@ void UpdateMouse()
 	Vec2 prev = g_MousePos;
 	POINT p;
 	GetCursorPos(&p);
-	ScreenToClient(FindWindowA(TEXT("XFileDraw"), nullptr), &p);
+	ScreenToClient(FindWindowA(WINDOW_CLASS_NAME.c_str(), nullptr), &p);
 
 	g_MousePos.X = (float)p.x;
 	g_MousePos.Y = (float)p.y;

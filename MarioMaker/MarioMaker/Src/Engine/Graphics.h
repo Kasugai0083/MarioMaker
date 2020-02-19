@@ -93,25 +93,8 @@ void DrawEnd();
 * @param[in] y Y軸描画座標
 * @param[in] texture_data 描画で使用するテクスチャのデータ
 */
-void DrawTexture(float x, float y, Texture* texture_data, float z_ = 0.f, float tu_ = 1.f, float tv_ = 1.f);
 void DrawTexture(Vec2 pos_, Texture* texture_data);
-void DrawTexture(float x, float y, Texture* texture_data, float width_, float height_);
-void DrawTexture(float x, float y, Texture* texture_data, Size size_);
-void CandleDraw(float x, float y, Texture* texture_data, Size size_, float hp_);
-void CandleDraw(float x, float y, Texture* texture_data, Size size_, Size flame_, float hp_);
 
-
-void DrawUVMappingTexture(float x, float y, Texture* texture_data, float texture_x, float texture_y, float rect_width, float rect_height);
-
-/*
-	アニメーションの描画用関数
-*/
-void DrawAnimation(float x_, float y_, AnimationTexture* animatinon_);
-bool DrawBlood(float x_, float y_);
-
-// in => true フェードイン
-// in => false フェードアウト
-void DrawFade(bool in_, D3DXCOLOR color_);
 
 /**
 * @brief テクスチャのUVスクロール描画関数@n
@@ -146,17 +129,7 @@ void DrawFont(float pos_x, float pos_y, const char* text, FontSize size, FontCol
 */
 bool CreateTexture(const char* file_name, Texture* texture_data);
 
-//統合画像から切り抜き用の関数
-//全ての切り抜かれる画像の大きさが一定である必要がある
-//tu,tv => 画像の割合
-//tv,tv = (切り抜かれる画像サイズ / 統合画像のサイズ)
-//spriteX,spriteY => 切り抜かれる画像サイズ
-//spriteNumX,spriteNumY => 切り抜きたい画像の座標
-void DrawIntegratedTexture(float x, float y, Texture* texture_data, float tu, float tv, float spriteX, float spriteY, int spriteNumX, int spriteNumY);
-
 //↓松本さんの関数↓//
-
-
 //----------------------------
 //頂点情報を生成する関数
 void CreateVertex(
