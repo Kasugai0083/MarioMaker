@@ -25,6 +25,7 @@ public:
 	void Release() override;								//!< ‰ð•ú
 
 private:
-
+	int m_count;
+	bool m_short_jump;
 };
 

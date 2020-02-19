@@ -5,7 +5,7 @@ const int MAP_H = 23;
 
 const float MAP_CHIP_SIZE = 32.f;
 
-const float GRAVITY = 0.1f;
+const float GRAVITY = 0.3f;
 const float WEIGHT = 1.f;
 
 // 空気抵抗を考慮しての最高速度を考える

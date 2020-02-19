@@ -1,7 +1,7 @@
 #include "Calculator.h"
 #include "..//..//Engine/Device.h"
 
-// ˆê‚Â‚Ã‚Â”»’è‚ðŽæ‚é•û–@‚ð„§
+const float CLEARANCE = 3.f;
 
 /**
 * Žl•ªŠ„
@@ -57,98 +57,108 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 	if (obj1_.curr_vec.y >= 16) { obj1_.curr_vec.y = 15; }
 	if (obj1_.curr_vec.x >= 16) { obj1_.curr_vec.x = 15; }
 
-	if (
-		obj1_.curr_vec.y > 0
-		//&& obj1_right.x >= obj2_left.x 
-		//&& obj1_left.x <= obj2_right.x
-		&& obj1_right.x >= obj2_left.x + 2.f 
-		&& obj1_left.x <= obj2_right.x - 2.f
-		&& obj1_bot.y >= obj2_top.y
-		&& obj1_bot.y <= obj2_center.y
-		)
-	{
-		return ForceHit::UPPER_SIDE;
-	}
-	else if (
-		obj1_.curr_vec.y < 0
-		//&& obj1_right.x >= obj2_left.x
-		//&& obj1_left.x <= obj2_right.x
-		&& obj1_right.x >= obj2_left.x + 2.f
-		&& obj1_left.x <= obj2_right.x - 2.f
-		&& obj1_top.y >= obj2_center.y
-		&& obj1_top.y <= obj2_bot.y
-		)
-	{
-		return ForceHit::UNDER_SIDE;
-	}
-	else if (
-		obj1_.curr_vec.x > 0
-		&& obj1_right.x >= obj2_left.x
-		&& obj1_right.x <= obj2_center.x
-		&& obj1_center.y >= obj2_top.y
-		&& obj1_center.y <= obj2_bot.y
-		)
-	{
-		return ForceHit::LEFT_SIDE;
-	}
-	else if (
-		obj1_.curr_vec.x < 0
-		&& obj1_left.x >= obj2_center.x
-		&& obj1_left.x <= obj2_right.x
-		&& obj1_center.y >= obj2_top.y
-		&& obj1_center.y <= obj2_bot.y
-		)
-	{
-		return ForceHit::RIGHT_SIDE;
-	}
-	// ‰Eã‚©‚çN“ü
-	else if (
-		obj1_.curr_vec.x < 0
-		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
-		&& obj1_left.x > obj2_center.x
-		&& obj1_left.x < obj2_right.x
-		&& obj1_bot.y > obj2_top.y
-		&& obj1_bot.y < obj2_center.y
-		)
-	{
-		return ForceHit::RIGHT_SIDE;
-	}
-	// ‰E‰º‚©‚çN“ü
-	else if (
-		obj1_.curr_vec.x < 0
-		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
-		&& obj1_left.x > obj2_center.x
-		&& obj1_left.x < obj2_right.x
-		&& obj1_top.y > obj2_center.y
-		&& obj1_top.y < obj2_bot.y
-		)
-	{
-		return ForceHit::RIGHT_SIDE;
-	}
-	// ¶ã‚©‚çN“ü
-	else if (
-		obj1_.curr_vec.x > 0
-		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
-		&& obj1_right.x > obj2_left.x
-		&& obj1_right.x < obj2_center.x
-		&& obj1_bot.y > obj2_top.y
-		&& obj1_bot.y < obj2_center.y
-		)
-	{
-		return ForceHit::LEFT_SIDE;
-	}
-	// ¶‰º‚©‚çN“ü
-	else if (
-		obj1_.curr_vec.x > 0
-		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
-		&& obj1_right.x > obj2_left.x
-		&& obj1_right.x < obj2_center.x
-		&& obj1_top.y > obj2_center.y
-		&& obj1_top.y < obj2_bot.y
-		)
-	{
-		return ForceHit::LEFT_SIDE;
-	}
+
+
+
+		if (
+			obj1_.curr_vec.y > 0
+			&& obj1_right.x >= obj2_left.x + CLEARANCE
+			&& obj1_left.x <= obj2_right.x - CLEARANCE
+			&& obj1_bot.y >= obj2_top.y
+			&& obj1_bot.y <= obj2_center.y
+			)
+		{
+			return ForceHit::UPPER_SIDE;
+		}
+		else if (
+			obj1_.curr_vec.y < 0
+			&& obj1_right.x >= obj2_left.x + CLEARANCE
+			&& obj1_left.x <= obj2_right.x - CLEARANCE
+			&& obj1_top.y >= obj2_center.y
+			&& obj1_top.y <= obj2_bot.y
+			)
+		{
+			return ForceHit::UNDER_SIDE;
+		}
+		else if (
+			obj1_.curr_vec.x > 0
+			&& obj1_right.x >= obj2_left.x
+			&& obj1_right.x <= obj2_center.x
+			&& obj1_center.y >= obj2_top.y
+			&& obj1_center.y <= obj2_bot.y
+			)
+		{
+			return ForceHit::LEFT_SIDE;
+		}
+		else if (
+			obj1_.curr_vec.x < 0
+			&& obj1_left.x >= obj2_center.x
+			&& obj1_left.x <= obj2_right.x
+			&& obj1_center.y >= obj2_top.y
+			&& obj1_center.y <= obj2_bot.y
+			)
+		{
+			return ForceHit::RIGHT_SIDE;
+		}
+		// ‰Eã‚©‚çN“ü
+		else if (
+			obj1_.curr_vec.x < 0
+			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+			&& obj1_left.x > obj2_center.x
+			&& obj1_left.x < obj2_right.x
+			&& obj1_bot.y > obj2_top.y
+			&& obj1_bot.y < obj2_center.y
+			)
+		{
+			return ForceHit::RIGHT_SIDE;
+		}
+		// ‰E‰º‚©‚çN“ü
+		else if (
+			obj1_.curr_vec.x < 0
+			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+			&& obj1_left.x > obj2_center.x
+			&& obj1_left.x < obj2_right.x
+			&& obj1_top.y > obj2_center.y
+			&& obj1_top.y < obj2_bot.y
+			)
+		{
+			return ForceHit::RIGHT_SIDE;
+		}
+		// ¶ã‚©‚çN“ü
+		else if (
+			obj1_.curr_vec.x > 0
+			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+			&& obj1_right.x > obj2_left.x
+			&& obj1_right.x < obj2_center.x
+			&& obj1_bot.y > obj2_top.y
+			&& obj1_bot.y < obj2_center.y
+			)
+		{
+			return ForceHit::LEFT_SIDE;
+		}
+		// ¶‰º‚©‚çN“ü
+		else if (
+			obj1_.curr_vec.x > 0
+			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+			&& obj1_right.x > obj2_left.x
+			&& obj1_right.x < obj2_center.x
+			&& obj1_top.y > obj2_center.y
+			&& obj1_top.y < obj2_bot.y
+			)
+		{
+			return ForceHit::LEFT_SIDE;
+		}
+
+	
+	//else if (
+	//	obj1_.curr_vec.y > 0
+	//	&& obj1_right.x >= obj2_left.x + CLEARANCE
+	//	&& obj1_left.x <= obj2_right.x - CLEARANCE
+	//	&& obj1_bot.y < obj2_top.y
+	//	)
+	//{
+	//	return ForceHit::NONE;
+	//}
 	return ForceHit::NONE;
 }
 

@@ -22,6 +22,9 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 	m_state.weight = 1.f;
 	m_state.speed = 0.5f;
 	m_state.jump_power = 5.f;
+
+	m_count = 0;
+	m_short_jump = false;
 }
 
 void Player::Update()
@@ -67,30 +70,30 @@ void Player::Update()
 
 	// 重力処理 start
 	// ジャンプ処理 start
-	static int count = 0;
-	static bool short_jump = false;
+	//static int count = 0;
+	//static bool short_jump = false;
 	if (Device::KeyOn(VK_SPACE)
 		&& m_state.has_on_ground)
 	{
 
 		m_state.grav_accel = -m_state.jump_power;
 		m_state.has_on_ground = false;
-		short_jump = true;
+		m_short_jump = true;
 
 	};
 
 	if (Device::KeyOn(VK_SPACE)
-		&& short_jump 
-		&& count <= 20)
+		&& m_short_jump 
+		&& m_count <= 20)
 
 	{
-		count++;
+		m_count++;
 		m_state.grav_accel = -m_state.jump_power;
 	}
 
 	if (Device::KeyOff(VK_SPACE)) 
 	{
-		short_jump = false;
+		m_short_jump = false;
 	}
 
 
@@ -98,8 +101,9 @@ void Player::Update()
 	if(m_state.has_on_ground)
 	{
 		m_state.grav_accel = 0.f;
-		short_jump = false;
-		count = 0;
+		m_short_jump = false;
+		m_count = 0;
+
 	}
 	else 
 	{
@@ -115,8 +119,8 @@ void Player::Update()
 	// ベクトルの計算 start
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
 	// ベクトルの計算 end
+	m_state.has_on_ground = false;
 
-	//m_state.has_on_ground = false;
 #else
 	// デバッグ用
 	if (Device::KeyOn('D'))

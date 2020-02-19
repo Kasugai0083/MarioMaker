@@ -86,7 +86,6 @@ void ActorManager::Update()
 		for (auto player : m_actors["ƒvƒŒƒCƒ„["])
 		{
 #if 1		
-
 			/**
 			* 4•ªŠ„ˆ—
 			*/
@@ -134,6 +133,13 @@ void ActorManager::Update()
 				player->SetGrvAccel(0.f);
 
 			}
+			//else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::NONE)
+			//{
+
+			//	player->SetHasOnGround(false);
+
+			//}
+
 
 #elif 1
 			/**
