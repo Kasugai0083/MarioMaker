@@ -9,6 +9,17 @@
 * Collisionクラスの方が良かったかな？
 */
 
+// 試験実装 四分割処理 start
+enum class ForceHit 
+{
+	UPPER_SIDE,
+	RIGHT_SIDE,
+	LEFT_SIDE,
+	DOWN_SIDE,
+	NONE
+};
+// 試験実装 四分割処理 end
+
 enum class PowKind {
 	UP,
 	DOWN,
@@ -31,7 +42,7 @@ public:
 	/**
 	* 四分割
 	*/
-	static bool ForceRectCollision(t_ASta obj1_, t_ASta obj2_);
+	static ForceHit ForceRectCollision(t_ASta obj1_, t_ASta obj2_);
 public:
 	/**
 	* 新しい処理

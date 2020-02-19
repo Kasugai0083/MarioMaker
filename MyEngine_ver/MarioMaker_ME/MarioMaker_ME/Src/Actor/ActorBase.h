@@ -14,9 +14,10 @@ typedef struct t_ActorState {
 	Pos2 old_pos;		//!< 古い座標情報(計算用)
 	t_Size size;		//!< サイズ
 	float weight;		//!< 重さ
-	float speed;		//!< 速度
-	float jump_power;	//!< ジャンプ力
-	float grav_accel;	//!< 重力加速度
+	float speed;			//!< 速度
+	float jump_power;		//!< ジャンプ力
+	float accel;			//!< 加速度
+	float grav_accel;		//!< 重力加速度
 	bool has_on_ground;	//!< 着地しているかどうか
 	t_Vec2 curr_vec;	//!< 現在のベクトル情報
 
@@ -40,7 +41,7 @@ public:
 	float GetGrvAccel() { return m_state.grav_accel; }					//!< 重力加速度の取得
 
 	void SetHasOnGround(bool has_) { m_state.has_on_ground = has_; }	//!< ジャンプフラグ変更
-	float GetHasOnGround() { return m_state.has_on_ground; }			//!< ジャンプフラグの取得
+	bool GetHasOnGround() { return m_state.has_on_ground; }			//!< ジャンプフラグの取得
 
 	t_Vec2 GetCurrVec() { return m_state.curr_vec; }			//!< ジャンプフラグの取得
 

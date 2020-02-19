@@ -6,30 +6,76 @@
 /**
 * Žl•ªŠ„
 */
-bool Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
+ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 {
-	Pos2 obj1_center;
+	/**
+	* Object1
+	*/
 	Pos2 obj1_half;
-
 	obj1_half.x = (obj1_.size.width / 2.f);
 	obj1_half.y = (obj1_.size.height / 2.f);
+	
+	Pos2 obj1_center;
+	obj1_center.x = obj1_.pos.x + obj1_half.x;
+	obj1_center.y = obj1_.pos.y + obj1_half.y;
 
-	obj1_center.x = obj1_.pos.x + (obj1_.size.width / 2.f);
-	obj1_center.y = obj1_.pos.y + (obj1_.size.height / 2.f);
+	Pos2 obj1_top;
+	obj1_top.x = obj1_center.x;
+	obj1_top.y = obj1_center.y - obj1_half.y;
+
+	Pos2 obj1_bot;
+	obj1_bot.x = obj1_center.x;
+	obj1_bot.y = obj1_center.y + obj1_half.y;
+
+	Pos2 obj1_left;
+	obj1_bot.x = obj1_center.x - obj1_half.x;
+	obj1_bot.y = obj1_center.y;
+
+	Pos2 obj1_right;
+	obj1_bot.x = obj1_center.x + obj1_half.x;
+	obj1_bot.y = obj1_center.y;
+
+	/**
+	* Object2
+	*/
+	Pos2 obj2_half;
+	obj2_half.x = (obj1_.size.width / 2.f);
+	obj2_half.y = (obj1_.size.height / 2.f);
 
 	Pos2 obj2_center;
-	obj2_center.x = obj2_.pos.x + (obj2_.size.width / 2.f);
-	obj2_center.y = obj2_.pos.y + (obj2_.size.height / 2.f);
+	obj2_center.x = obj2_.pos.x + obj2_half.x;
+	obj2_center.y = obj2_.pos.y + obj2_half.y;
 
+	Pos2 obj2_top;
+	obj2_top.x = obj2_center.x;
+	obj2_top.y = obj2_center.y - obj2_half.y;
+
+	Pos2 obj2_bot;
+	obj2_bot.x = obj2_center.x;
+	obj2_bot.y = obj2_center.y + obj2_half.y;
+
+	Pos2 obj2_left;
+	obj2_bot.x = obj2_center.x - obj2_half.x;
+	obj2_bot.y = obj2_center.y;
+
+	Pos2 obj2_right;
+	obj2_bot.x = obj2_center.x + obj2_half.x;
+	obj2_bot.y = obj2_center.y;
+	
+	if (obj1_.curr_vec.y >= 16) { obj1_.curr_vec.y = 15; }
 	if (
-		obj1_center.y >= obj2_center.y
+		obj1_.curr_vec.y > 0
+		&& obj1_center.x >= obj2_left.x
+		&& obj1_center.x <= obj2_right.x
+		&& obj1_center.y >= obj2_top.y
+		&& obj1_center.y <= obj2_center.y
 		)
 	{
 
-		return true;
+		return ForceHit::UPPER_SIDE;
 
 	}
-	return false;
+	return ForceHit::NONE;
 }
 
 /**

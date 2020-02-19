@@ -10,6 +10,9 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 {
 	m_drawer2d.LoadTexture(fileName_);
 
+	// 構造体を全て 0 で初期化
+	ZeroMemory(&m_state, sizeof(t_ActorState));
+
 	m_state.pos.x = pos_.x;
 	m_state.pos.y = pos_.y;
 
@@ -17,16 +20,8 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 	m_state.size.width = MAP_CHIP_SIZE;
 
 	m_state.weight = 1.f;
-	m_state.speed = 3.f;
+	m_state.speed = 1.f;
 	m_state.jump_power = 5.f;
-	m_state.grav_accel = 0.f;
-
-	m_state.curr_vec.x = 0.f;
-	m_state.curr_vec.y = 0.f;
-	m_state.old_pos.x = 0.f;
-	m_state.old_pos.y = 0.f;
-	
-	m_state.has_on_ground = false;
 }
 
 void Player::Update()
@@ -41,11 +36,31 @@ void Player::Update()
 	// 左右の移動処理 start
 	if (Device::KeyOn('D')) 
 	{ 
-		m_state.pos.x += m_state.speed;
+		m_state.accel += m_state.speed;
 	}
 	if (Device::KeyOn('A'))
 	{
-		m_state.pos.x -= m_state.speed;
+		m_state.accel -= m_state.speed;
+	}
+
+	if (m_state.accel >= MAX_SPEED) { m_state.accel = MAX_SPEED; }
+	if (m_state.accel <= -MAX_SPEED) { m_state.accel = -MAX_SPEED; }
+
+	if (m_state.has_on_ground && m_state.accel > 0.0f)
+	{ 
+		m_state.accel -= FRICTION;
+		if (m_state.accel < 0.f)
+		{
+			m_state.accel = 0.f;
+		}
+	}
+	else if (m_state.has_on_ground && m_state.accel < 0.0f) 
+	{ 
+		m_state.accel += FRICTION;
+		if (m_state.accel > 0.f)
+		{
+			m_state.accel = 0.f;
+		}
 	}
 	// 左右の移動処理 end
 
@@ -87,10 +102,13 @@ void Player::Update()
 	{
 		m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
 	}
-	m_state.pos.y += m_state.grav_accel;
-
 	// 重力処理 end
 	
+	// 加速度を座標に反映 start
+	m_state.pos.x += m_state.accel;
+	m_state.pos.y += m_state.grav_accel;
+	// 加速度を座標に反映 end
+
 	// ベクトルの計算 start
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
 	// ベクトルの計算 end
