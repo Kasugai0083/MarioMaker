@@ -15,7 +15,7 @@ enum class ForceHit
 	UPPER_SIDE,
 	RIGHT_SIDE,
 	LEFT_SIDE,
-	DOWN_SIDE,
+	UNDER_SIDE,
 	NONE
 };
 // ŽŽŒ±ŽÀ‘• Žl•ªŠ„ˆ— end

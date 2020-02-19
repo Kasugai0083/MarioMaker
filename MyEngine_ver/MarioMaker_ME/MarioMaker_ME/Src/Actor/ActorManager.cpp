@@ -85,7 +85,7 @@ void ActorManager::Update()
 	{
 		for (auto player : m_actors["ƒvƒŒƒCƒ„["])
 		{
-#if 0
+#if 1
 			/**
 			* 4•ªŠ„ˆ—
 			*/
@@ -101,6 +101,35 @@ void ActorManager::Update()
 			player->SetHasOnGround(true);
 
 			}
+			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::LEFT_SIDE)
+			{
+
+				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+
+			}
+			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::RIGHT_SIDE)
+			{
+
+				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
+				float player_y = player->GetPos().y;
+
+				player->SetPos(Pos2(player_x, player_y));
+
+			}
+			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UNDER_SIDE)
+			{
+
+				float player_x = player->GetPos().x;
+				float player_y = block->GetPos().y + MAP_CHIP_SIZE;
+
+				player->SetPos(Pos2(player_x, player_y));
+				player->SetGrvAccel(0.f);
+
+			}
+
 #elif 1
 			/**
 			* ’Êí‚Ìˆ—
