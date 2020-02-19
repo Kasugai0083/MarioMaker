@@ -37,6 +37,8 @@ public:
 	Pos2 GetPos() { return m_state.pos; }						//!< 座標取得
 	void SetPos(Pos2 pos_) { m_state.pos = pos_; }				//!< 座標変更
 
+	void SetAccel(float accel_) { m_state.accel = accel_; }	//!< 重力加速度変更
+
 	void SetGrvAccel(float gravity_) { m_state.grav_accel = gravity_; }	//!< 重力加速度変更
 	float GetGrvAccel() { return m_state.grav_accel; }					//!< 重力加速度の取得
 

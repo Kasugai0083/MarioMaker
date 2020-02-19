@@ -59,8 +59,10 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 
 	if (
 		obj1_.curr_vec.y > 0
-		&& obj1_center.x >= obj2_left.x
-		&& obj1_center.x <= obj2_right.x
+		//&& obj1_right.x >= obj2_left.x 
+		//&& obj1_left.x <= obj2_right.x
+		&& obj1_right.x >= obj2_left.x + 2.f 
+		&& obj1_left.x <= obj2_right.x - 2.f
 		&& obj1_bot.y >= obj2_top.y
 		&& obj1_bot.y <= obj2_center.y
 		)
@@ -69,8 +71,10 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 	}
 	else if (
 		obj1_.curr_vec.y < 0
-		&& obj1_center.x >= obj2_left.x
-		&& obj1_center.x <= obj2_right.x
+		//&& obj1_right.x >= obj2_left.x
+		//&& obj1_left.x <= obj2_right.x
+		&& obj1_right.x >= obj2_left.x + 2.f
+		&& obj1_left.x <= obj2_right.x - 2.f
 		&& obj1_top.y >= obj2_center.y
 		&& obj1_top.y <= obj2_bot.y
 		)
@@ -96,6 +100,54 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 		)
 	{
 		return ForceHit::RIGHT_SIDE;
+	}
+	// ‰Eã‚©‚çN“ü
+	else if (
+		obj1_.curr_vec.x < 0
+		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+		&& obj1_left.x > obj2_center.x
+		&& obj1_left.x < obj2_right.x
+		&& obj1_bot.y > obj2_top.y
+		&& obj1_bot.y < obj2_center.y
+		)
+	{
+		return ForceHit::RIGHT_SIDE;
+	}
+	// ‰E‰º‚©‚çN“ü
+	else if (
+		obj1_.curr_vec.x < 0
+		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+		&& obj1_left.x > obj2_center.x
+		&& obj1_left.x < obj2_right.x
+		&& obj1_top.y > obj2_center.y
+		&& obj1_top.y < obj2_bot.y
+		)
+	{
+		return ForceHit::RIGHT_SIDE;
+	}
+	// ¶ã‚©‚çN“ü
+	else if (
+		obj1_.curr_vec.x > 0
+		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+		&& obj1_right.x > obj2_left.x
+		&& obj1_right.x < obj2_center.x
+		&& obj1_bot.y > obj2_top.y
+		&& obj1_bot.y < obj2_center.y
+		)
+	{
+		return ForceHit::LEFT_SIDE;
+	}
+	// ¶‰º‚©‚çN“ü
+	else if (
+		obj1_.curr_vec.x > 0
+		&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
+		&& obj1_right.x > obj2_left.x
+		&& obj1_right.x < obj2_center.x
+		&& obj1_top.y > obj2_center.y
+		&& obj1_top.y < obj2_bot.y
+		)
+	{
+		return ForceHit::LEFT_SIDE;
 	}
 	return ForceHit::NONE;
 }

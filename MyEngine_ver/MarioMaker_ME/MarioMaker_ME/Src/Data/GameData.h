@@ -12,4 +12,4 @@ const float WEIGHT = 1.f;
 const float MAX_SPEED = 6.f;
 
 // 摩擦は最終的にブロックに持たせたい
-const float FRICTION = 0.15f;
+const float FRICTION = 0.3f;

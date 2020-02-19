@@ -20,7 +20,7 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 	m_state.size.width = MAP_CHIP_SIZE;
 
 	m_state.weight = 1.f;
-	m_state.speed = 1.f;
+	m_state.speed = 0.5f;
 	m_state.jump_power = 5.f;
 }
 
@@ -28,7 +28,8 @@ void Player::Update()
 {
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; }
-
+#if 1
+	// 本番用
 	// ベクトル情報の管理 start
 	m_state.old_pos = m_state.pos;
 	// ベクトル情報の管理 end
@@ -91,6 +92,8 @@ void Player::Update()
 	{
 		short_jump = false;
 	}
+
+
 	// ジャンプ処理 end
 	if(m_state.has_on_ground)
 	{
@@ -113,8 +116,28 @@ void Player::Update()
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
 	// ベクトルの計算 end
 
-	m_state.has_on_ground = false;
+	//m_state.has_on_ground = false;
+#else
+	// デバッグ用
+	if (Device::KeyOn('D'))
+	{
+		m_state.pos.x += m_state.speed;
+	}
+	if (Device::KeyOn('A'))
+	{
+		m_state.pos.x -= m_state.speed;
+	}
+	if (Device::KeyOn('W'))
+	{
+		m_state.pos.y -= m_state.speed;
+	}
+	if (Device::KeyOn('S'))
+	{
+		m_state.pos.y += m_state.speed;
+	}
+	m_state.curr_vec = m_state.pos - m_state.old_pos;
 
+#endif
 }
 
 void Player::Draw(std::string fileName_)
@@ -128,10 +151,13 @@ void Player::Draw(std::string fileName_)
 	player_posy_txt += std::to_string(m_state.pos.y);
 	std::string player_grv_txt = "重力加速度 => ";
 	player_grv_txt += std::to_string(m_state.grav_accel);
+	std::string player_acs_txt = "加速度 => ";
+	player_acs_txt += std::to_string(m_state.accel);
 
 	m_drawer2d.DrawFont(Pos2(100.f, 100.f), player_posx_txt);
 	m_drawer2d.DrawFont(Pos2(100.f, 150.f), player_posy_txt);
 	m_drawer2d.DrawFont(Pos2(100.f, 200.f), player_grv_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 250.f), player_acs_txt);
 	// プレイヤー座標を表示 end
 
 }

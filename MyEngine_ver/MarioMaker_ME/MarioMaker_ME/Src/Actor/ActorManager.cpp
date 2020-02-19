@@ -85,7 +85,8 @@ void ActorManager::Update()
 	{
 		for (auto player : m_actors["ƒvƒŒƒCƒ„["])
 		{
-#if 1
+#if 1		
+
 			/**
 			* 4•ªŠ„ˆ—
 			*/
@@ -94,6 +95,7 @@ void ActorManager::Update()
 			{
 
 			float player_x = player->GetPos().x;
+			//float player_y = player->GetPos().y - (player->GetGrvAccel());
 			float player_y = block->GetPos().y - MAP_CHIP_SIZE;
 
 			player->SetPos(Pos2(player_x, player_y));
@@ -109,6 +111,7 @@ void ActorManager::Update()
 
 				player->SetPos(Pos2(player_x, player_y));
 
+				player->SetAccel(0.f);
 			}
 			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::RIGHT_SIDE)
 			{
@@ -117,6 +120,8 @@ void ActorManager::Update()
 				float player_y = player->GetPos().y;
 
 				player->SetPos(Pos2(player_x, player_y));
+				
+				player->SetAccel(0.f);
 
 			}
 			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UNDER_SIDE)
