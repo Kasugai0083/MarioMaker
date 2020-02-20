@@ -85,173 +85,182 @@ void ActorManager::Update()
 	{
 		for (auto player : m_actors["プレイヤー"])
 		{
+
+			if (
+				block->GetState().pos.x >= (player->GetState().pos.x - player->GetState().size.width)
+				&& block->GetState().pos.x <= (player->GetState().pos.x + (2 * player->GetState().size.width))
+				&& block->GetState().pos.y >= (player->GetState().pos.y - player->GetState().size.height)
+				&& block->GetState().pos.y <= (player->GetState().pos.y + (2 * player->GetState().size.height))
+				)
+			{
+
 #if 1		
-			/**
-			* 4分割処理
-			*/
-			// 上方処理
-			if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UPPER_SIDE)
-			{
+				/**
+				* 4分割処理
+				*/
+				// 上方処理
+				if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UPPER_SIDE)
+				{
 
-			float player_x = player->GetPos().x;
-			//float player_y = player->GetPos().y - (player->GetGrvAccel());
-			float player_y = block->GetPos().y - MAP_CHIP_SIZE;
+					float player_x = player->GetPos().x;
+					//float player_y = player->GetPos().y - (player->GetGrvAccel());
+					float player_y = block->GetPos().y - MAP_CHIP_SIZE;
 
-			player->SetPos(Pos2(player_x, player_y));
+					player->SetPos(Pos2(player_x, player_y));
 
-			player->SetHasOnGround(true);
+					player->SetHasOnGround(true);
 
-			}
-			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::LEFT_SIDE)
-			{
+				}
+				else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::LEFT_SIDE)
+				{
 
-				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
+					float player_x = block->GetPos().x - MAP_CHIP_SIZE;
+					float player_y = player->GetPos().y;
 
-				player->SetPos(Pos2(player_x, player_y));
+					player->SetPos(Pos2(player_x, player_y));
 
-				player->SetAccel(0.f);
-			}
-			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::RIGHT_SIDE)
-			{
+					player->SetAccel(0.f);
+				}
+				else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::RIGHT_SIDE)
+				{
 
-				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
+					float player_x = block->GetPos().x + MAP_CHIP_SIZE;
+					float player_y = player->GetPos().y;
 
-				player->SetPos(Pos2(player_x, player_y));
-				
-				player->SetAccel(0.f);
+					player->SetPos(Pos2(player_x, player_y));
 
-			}
-			else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UNDER_SIDE)
-			{
+					player->SetAccel(0.f);
 
-				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y + MAP_CHIP_SIZE;
+				}
+				else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UNDER_SIDE)
+				{
 
-				player->SetPos(Pos2(player_x, player_y));
-				player->SetGrvAccel(0.f);
+					float player_x = player->GetPos().x;
+					float player_y = block->GetPos().y + MAP_CHIP_SIZE;
 
-			}
-			//else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::NONE)
-			//{
+					player->SetPos(Pos2(player_x, player_y));
+					player->SetGrvAccel(0.f);
 
-			//	player->SetHasOnGround(false);
+				}
+				//else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::NONE)
+				//{
 
-			//}
+				//	player->SetHasOnGround(false);
+
+				//}
 
 
 #elif 1
-			/**
-			* 通常の処理
-			*/
-			// 左方処理
-			if (Calculator::LeftSideCollision(player->GetState(), block->GetState()))
-			{
+				/**
+				* 通常の処理
+				*/
+				// 左方処理
+				if (Calculator::LeftSideCollision(player->GetState(), block->GetState()))
+				{
 
-				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
+					float player_x = block->GetPos().x - MAP_CHIP_SIZE;
+					float player_y = player->GetPos().y;
 
-				player->SetPos(Pos2(player_x, player_y));
-				
+					player->SetPos(Pos2(player_x, player_y));
 
-			}
-			// 右方処理
-			else if (Calculator::RightSideCollision(player->GetState(), block->GetState()))
-			{
 
-				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
+				}
+				// 右方処理
+				else if (Calculator::RightSideCollision(player->GetState(), block->GetState()))
+				{
 
-				player->SetPos(Pos2(player_x, player_y));
+					float player_x = block->GetPos().x + MAP_CHIP_SIZE;
+					float player_y = player->GetPos().y;
 
-			}
-			// 下方処理
-			else if (Calculator::UnderSideCollision(player->GetState(), block->GetState()))
-			{
+					player->SetPos(Pos2(player_x, player_y));
 
-				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y + MAP_CHIP_SIZE;
+				}
+				// 下方処理
+				else if (Calculator::UnderSideCollision(player->GetState(), block->GetState()))
+				{
 
-				player->SetPos(Pos2(player_x, player_y));
-				player->SetGrvAccel(0.f);
+					float player_x = player->GetPos().x;
+					float player_y = block->GetPos().y + MAP_CHIP_SIZE;
 
-			}
-			// 上方処理
-			else if (Calculator::UpSideCollision(player->GetState(), block->GetState()))
-			{
+					player->SetPos(Pos2(player_x, player_y));
+					player->SetGrvAccel(0.f);
 
-				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
+				}
+				// 上方処理
+				else if (Calculator::UpSideCollision(player->GetState(), block->GetState()))
+				{
 
-				player->SetPos(Pos2(player_x, player_y));
+					float player_x = player->GetPos().x;
+					float player_y = block->GetPos().y - MAP_CHIP_SIZE;
 
-				player->SetHasOnGround(true);
+					player->SetPos(Pos2(player_x, player_y));
 
-			}
+					player->SetHasOnGround(true);
+
+				}
 #else
-			/**
-			* 古い処理
-			*/
-			if (Calculator::SerchUpDown(
-				player->GetPos(),
-				block->GetPos(),
-				MAP_CHIP_SIZE,
-				player->GetCurrVec()
-			) == PowKind::DOWN)
-			{
-				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y - MAP_CHIP_SIZE;
+				/**
+				* 古い処理
+				*/
+				if (Calculator::SerchUpDown(
+					player->GetPos(),
+					block->GetPos(),
+					MAP_CHIP_SIZE,
+					player->GetCurrVec()
+				) == PowKind::DOWN)
+				{
+					float player_x = player->GetPos().x;
+					float player_y = block->GetPos().y - MAP_CHIP_SIZE;
 
-				player->SetPos(Pos2(player_x, player_y));
+					player->SetPos(Pos2(player_x, player_y));
 
-				player->SetHasOnGround(true);
+					player->SetHasOnGround(true);
 
-			}
-			else if (Calculator::SerchUpDown(
-				player->GetPos(),
-				block->GetPos(),
-				MAP_CHIP_SIZE,
-				player->GetCurrVec()
-			) == PowKind::UP)
-			{
-				float player_x = player->GetPos().x;
-				float player_y = block->GetPos().y + MAP_CHIP_SIZE;
+				}
+				else if (Calculator::SerchUpDown(
+					player->GetPos(),
+					block->GetPos(),
+					MAP_CHIP_SIZE,
+					player->GetCurrVec()
+				) == PowKind::UP)
+				{
+					float player_x = player->GetPos().x;
+					float player_y = block->GetPos().y + MAP_CHIP_SIZE;
 
-				player->SetPos(Pos2(player_x, player_y));
-				player->SetGrvAccel(0.f);
-			}
-			else if (Calculator::SerchRightLeft(
-				player->GetPos(),
-				block->GetPos(),
-				MAP_CHIP_SIZE,
-				player->GetCurrVec()
-			) == PowKind::LEFT)
-			{
-				float player_x = block->GetPos().x + MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
+					player->SetPos(Pos2(player_x, player_y));
+					player->SetGrvAccel(0.f);
+				}
+				else if (Calculator::SerchRightLeft(
+					player->GetPos(),
+					block->GetPos(),
+					MAP_CHIP_SIZE,
+					player->GetCurrVec()
+				) == PowKind::LEFT)
+				{
+					float player_x = block->GetPos().x + MAP_CHIP_SIZE;
+					float player_y = player->GetPos().y;
 
-				player->SetPos(Pos2(player_x, player_y));
-			}
-			else if (Calculator::SerchRightLeft(
-				player->GetPos(),
-				block->GetPos(),
-				MAP_CHIP_SIZE,
-				player->GetCurrVec()
-			) == PowKind::RIGHT)
-			{
-				float player_x = block->GetPos().x - MAP_CHIP_SIZE;
-				float player_y = player->GetPos().y;
+					player->SetPos(Pos2(player_x, player_y));
+				}
+				else if (Calculator::SerchRightLeft(
+					player->GetPos(),
+					block->GetPos(),
+					MAP_CHIP_SIZE,
+					player->GetCurrVec()
+				) == PowKind::RIGHT)
+				{
+					float player_x = block->GetPos().x - MAP_CHIP_SIZE;
+					float player_y = player->GetPos().y;
 
-				player->SetPos(Pos2(player_x, player_y));
-			}
+					player->SetPos(Pos2(player_x, player_y));
+				}
 #endif
 
 
+			}
 		}
+		// ブロックとプレイヤーの当たり end
 	}
-	// ブロックとプレイヤーの当たり end
-	
 }
 
 void ActorManager::Release()

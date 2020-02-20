@@ -119,7 +119,7 @@ void Player::Update()
 	// ベクトルの計算 start
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
 	// ベクトルの計算 end
-	m_state.has_on_ground = false;
+	//m_state.has_on_ground = false;
 
 #else
 	// デバッグ用
