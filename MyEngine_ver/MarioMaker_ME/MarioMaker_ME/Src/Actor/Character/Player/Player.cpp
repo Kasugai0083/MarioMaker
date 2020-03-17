@@ -69,35 +69,32 @@ void Player::Update()
 	// 左右の移動処理 end
 
 	// 重力処理 start
-	// ジャンプ処理 start
-	//static int count = 0;
-	//static bool short_jump = false;
-	if (Device::KeyOn(VK_SPACE)
-		&& m_state.has_on_ground)
-	{
+		// ジャンプ処理 start
+		if (Device::KeyOn(VK_SPACE)
+			&& m_state.has_on_ground)
+		{
 
-		m_state.grav_accel = -m_state.jump_power;
-		m_state.has_on_ground = false;
-		m_short_jump = true;
+			m_state.grav_accel = -m_state.jump_power;
+			m_state.has_on_ground = false;
+			m_short_jump = true;
 
-	};
+		};
 
-	if (Device::KeyOn(VK_SPACE)
-		&& m_short_jump 
-		&& m_count <= 20)
+		if (Device::KeyOn(VK_SPACE)
+			&& m_short_jump 
+			&& m_count <= 20)
 
-	{
-		m_count++;
-		m_state.grav_accel = -m_state.jump_power;
-	}
+		{
+			m_count++;
+			m_state.grav_accel = -m_state.jump_power;
+		}
 
-	if (Device::KeyOff(VK_SPACE)) 
-	{
-		m_short_jump = false;
-	}
-
-
-	// ジャンプ処理 end
+		if (Device::KeyOff(VK_SPACE)) 
+		{
+			m_short_jump = false;
+		}
+		// ジャンプ処理 end
+	
 	if(m_state.has_on_ground)
 	{
 		m_state.grav_accel = 0.f;
@@ -119,7 +116,7 @@ void Player::Update()
 	// ベクトルの計算 start
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
 	// ベクトルの計算 end
-	//m_state.has_on_ground = false;
+	m_state.has_on_ground = false;
 
 #else
 	// デバッグ用
@@ -157,11 +154,25 @@ void Player::Draw(std::string fileName_)
 	player_grv_txt += std::to_string(m_state.grav_accel);
 	std::string player_acs_txt = "加速度 => ";
 	player_acs_txt += std::to_string(m_state.accel);
+	std::string player_ground_txt = "プレイヤーの着地状況 => ";
 
-	m_drawer2d.DrawFont(Pos2(100.f, 100.f), player_posx_txt);
-	m_drawer2d.DrawFont(Pos2(100.f, 150.f), player_posy_txt);
-	m_drawer2d.DrawFont(Pos2(100.f, 200.f), player_grv_txt);
-	m_drawer2d.DrawFont(Pos2(100.f, 250.f), player_acs_txt);
+	std::string ground_txt;
+	if (m_state.has_on_ground)
+	{
+		ground_txt = "着地";
+	}
+	else 
+	{
+		ground_txt = "空中";
+	}
+
+	player_ground_txt += ground_txt;
+
+	m_drawer2d.DrawFont(Pos2(100.f, 50.f), player_posx_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 100.f), player_posy_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 150.f), player_grv_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 200.f), player_acs_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 250.f), player_ground_txt);
 	// プレイヤー座標を表示 end
 
 }

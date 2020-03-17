@@ -85,7 +85,7 @@ void ActorManager::Update()
 	{
 		for (auto player : m_actors["プレイヤー"])
 		{
-
+			// 周辺調査
 			if (
 				block->GetState().pos.x >= (player->GetState().pos.x - player->GetState().size.width)
 				&& block->GetState().pos.x <= (player->GetState().pos.x + (2 * player->GetState().size.width))
@@ -98,7 +98,6 @@ void ActorManager::Update()
 				/**
 				* 4分割処理
 				*/
-				// 上方処理
 				if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UPPER_SIDE)
 				{
 
@@ -120,6 +119,9 @@ void ActorManager::Update()
 					player->SetPos(Pos2(player_x, player_y));
 
 					player->SetAccel(0.f);
+
+					//player->SetHasOnGround(false);
+
 				}
 				else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::RIGHT_SIDE)
 				{
@@ -131,6 +133,8 @@ void ActorManager::Update()
 
 					player->SetAccel(0.f);
 
+					//player->SetHasOnGround(false);
+
 				}
 				else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UNDER_SIDE)
 				{
@@ -141,7 +145,10 @@ void ActorManager::Update()
 					player->SetPos(Pos2(player_x, player_y));
 					player->SetGrvAccel(0.f);
 
+					//player->SetHasOnGround(false);
 				}
+				// 上方処理
+
 				//else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::NONE)
 				//{
 
@@ -258,9 +265,19 @@ void ActorManager::Update()
 
 
 			}
+
 		}
 		// ブロックとプレイヤーの当たり end
 	}
+	//// アクター全体の更新処理 start
+	//for (auto i : m_actors)
+	//{
+	//	for (auto j : m_actors[i.first])
+	//	{
+	//		j->Update();
+	//	}
+	//}
+	//// アクター全体の更新処理 end
 }
 
 void ActorManager::Release()
