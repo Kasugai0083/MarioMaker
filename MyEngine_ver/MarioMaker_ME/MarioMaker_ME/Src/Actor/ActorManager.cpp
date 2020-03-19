@@ -102,7 +102,6 @@ void ActorManager::Update()
 				{
 
 					float player_x = player->GetPos().x;
-					//float player_y = player->GetPos().y - (player->GetGrvAccel());
 					float player_y = block->GetPos().y - MAP_CHIP_SIZE;
 
 					player->SetPos(Pos2(player_x, player_y));

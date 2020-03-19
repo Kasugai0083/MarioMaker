@@ -103,6 +103,8 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 		// âEè„Ç©ÇÁêNì¸
 		else if (
 			obj1_.curr_vec.x < 0
+			&& obj1_.curr_vec.y > 0
+			&& obj1_.has_on_ground
 			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
 			&& obj1_left.x > obj2_center.x
 			&& obj1_left.x < obj2_right.x
@@ -115,6 +117,8 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 		// âEâ∫Ç©ÇÁêNì¸
 		else if (
 			obj1_.curr_vec.x < 0
+			&& obj1_.curr_vec.y < 0
+			&& obj1_.has_on_ground
 			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
 			&& obj1_left.x > obj2_center.x
 			&& obj1_left.x < obj2_right.x
@@ -127,6 +131,7 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 		// ç∂è„Ç©ÇÁêNì¸
 		else if (
 			obj1_.curr_vec.x > 0
+			&& obj1_.has_on_ground
 			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
 			&& obj1_right.x > obj2_left.x
 			&& obj1_right.x < obj2_center.x
@@ -139,6 +144,7 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 		// ç∂â∫Ç©ÇÁêNì¸
 		else if (
 			obj1_.curr_vec.x > 0
+			&& obj1_.has_on_ground
 			&& (obj1_.curr_vec.y < 0 || obj1_.curr_vec.y > 0)
 			&& obj1_right.x > obj2_left.x
 			&& obj1_right.x < obj2_center.x

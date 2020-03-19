@@ -69,6 +69,7 @@ void Player::Update()
 	// 左右の移動処理 end
 
 	// 重力処理 start
+
 		// ジャンプ処理 start
 		if (Device::KeyOn(VK_SPACE)
 			&& m_state.has_on_ground)
@@ -95,17 +96,16 @@ void Player::Update()
 		}
 		// ジャンプ処理 end
 	
-	if(m_state.has_on_ground)
+
+	if (m_state.has_on_ground)
 	{
 		m_state.grav_accel = 0.f;
 		m_short_jump = false;
 		m_count = 0;
+	}
 
-	}
-	else 
-	{
-		m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
-	}
+	m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
+
 	// 重力処理 end
 	
 	// 加速度を座標に反映 start
@@ -115,9 +115,13 @@ void Player::Update()
 
 	// ベクトルの計算 start
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
+	if (m_state.curr_vec.y > 0)
+	{
+		m_state.has_on_ground = false;
+	}
 	// ベクトルの計算 end
-	m_state.has_on_ground = false;
 
+	//m_state.has_on_ground = false;
 #else
 	// デバッグ用
 	if (Device::KeyOn('D'))
