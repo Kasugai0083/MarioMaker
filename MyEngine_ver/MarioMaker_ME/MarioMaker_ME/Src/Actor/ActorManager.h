@@ -28,6 +28,8 @@ public:
 	void Draw();	//!< •`‰æ
 	void Release();	//!< ‰ð•ú
 
+	void PlayerAndBlockCollide();
+
 	void GetCameraPTR(Camera* camera_) { m_camera_ptr = camera_; } //!< ƒJƒƒ‰î•ñ‚ðŽæ“¾
 private:
 	int* m_map[23][40];	//!< Csv‚Ìî•ñ‚ð“Ç‚Ýž‚Ý—p

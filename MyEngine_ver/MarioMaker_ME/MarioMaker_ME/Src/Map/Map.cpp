@@ -25,10 +25,11 @@ void MapManager::Update() {
 
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; };
+
 	acs->SetCurrGravity(m_gravity);
 	acs->UpdateCameraPTR(&m_map_camera);
 	// テスト中
-	m_map_camera.Update();
+	//m_map_camera.Update();
 	// テスト中ここまで
 
 	m_actor_mgr.Update();

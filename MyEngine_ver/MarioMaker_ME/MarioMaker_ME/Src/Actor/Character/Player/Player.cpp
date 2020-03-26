@@ -32,7 +32,7 @@ void Player::Update()
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; }
 
-	m_camera_ptr->SetCameraPosition(m_state.pos);
+	//m_camera_ptr->Update(m_state.pos);
 
 #if 1
 	// –{”Ô—p

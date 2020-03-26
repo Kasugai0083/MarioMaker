@@ -36,7 +36,7 @@ public:
 	Camera(t_Vec2 pos_) { Init(pos_); }
 
 	void Init(t_Vec2 pos_);
-	void Update();
+	void Update(t_Vec2 pos_);
 
 	t_Vec2 ConvertScreen(t_Vec2 pos_);
 	t_Vec2 GetPosition() { return m_pos; }

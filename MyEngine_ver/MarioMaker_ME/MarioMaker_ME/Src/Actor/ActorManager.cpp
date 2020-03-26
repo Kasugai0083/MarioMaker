@@ -71,19 +71,8 @@ void ActorManager::Draw()
 	}
 }
 
-// 参照 => チェルノブイリ実験場
-void ActorManager::Update()
+void ActorManager::PlayerAndBlockCollide() 
 {
-	// アクター全体の更新処理 start
-	for (auto i : m_actors)
-	{
-		for (auto j : m_actors[i.first])
-		{
-			j->Update();
-		}
-	}
-	// アクター全体の更新処理 end
-
 	// ブロックとプレイヤーの当たり start
 	Pos2 curr_block(0.f, 0.f);
 
@@ -125,8 +114,6 @@ void ActorManager::Update()
 
 					player->SetAccel(0.f);
 
-					//player->SetHasOnGround(false);
-
 				}
 				else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::RIGHT_SIDE)
 				{
@@ -137,9 +124,6 @@ void ActorManager::Update()
 					player->SetPos(Pos2(player_x, player_y));
 
 					player->SetAccel(0.f);
-
-					//player->SetHasOnGround(false);
-
 				}
 				else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::UNDER_SIDE)
 				{
@@ -150,16 +134,7 @@ void ActorManager::Update()
 					player->SetPos(Pos2(player_x, player_y));
 					player->SetGrvAccel(0.f);
 
-					//player->SetHasOnGround(false);
 				}
-				// 上方処理
-
-				//else if (Calculator::ForceRectCollision(player->GetState(), block->GetState()) == ForceHit::NONE)
-				//{
-
-				//	player->SetHasOnGround(false);
-
-				//}
 
 
 #elif 1
@@ -270,19 +245,38 @@ void ActorManager::Update()
 
 
 			}
-
 		}
-		// ブロックとプレイヤーの当たり end
 	}
-	//// アクター全体の更新処理 start
-	//for (auto i : m_actors)
-	//{
-	//	for (auto j : m_actors[i.first])
-	//	{
-	//		j->Update();
-	//	}
-	//}
-	//// アクター全体の更新処理 end
+}
+
+// 参照 => チェルノブイリ実験場
+void ActorManager::Update()
+{
+	// アクター全体の更新処理 start
+	for (auto i : m_actors)
+	{
+		for (auto j : m_actors[i.first])
+		{
+			j->Update();
+		}
+	}
+	// アクター全体の更新処理 end
+
+	// ブロックとプレイヤーの当たり
+	PlayerAndBlockCollide();
+	
+	int count = 0;
+	t_Vec2 sum_pos = t_Vec2(0.f,0.f);
+	for (auto player : m_actors["プレイヤー"]) 
+	{
+		count++;
+		sum_pos += player->GetState().pos;
+	}
+	t_Vec2 camera_pos;
+	camera_pos.x = sum_pos.x / (float)count;
+	camera_pos.y = sum_pos.y / (float)count;
+
+	m_camera_ptr->Update(camera_pos);
 }
 
 void ActorManager::Release()
