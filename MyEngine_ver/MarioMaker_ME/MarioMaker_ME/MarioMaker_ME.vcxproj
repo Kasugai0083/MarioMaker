@@ -181,6 +181,7 @@
     <ClInclude Include="Src\Scene\SceneID.h" />
     <ClInclude Include="Src\Scene\Title\TitleScene.h" />
     <ClInclude Include="Src\Utility\Debug.h" />
+    <ClInclude Include="Src\Utility\Grid.h" />
     <ClInclude Include="Src\Utility\SingletonTemplate.h" />
     <ClInclude Include="Src\Utility\Size.h" />
     <ClInclude Include="Src\Utility\Vec2.h" />

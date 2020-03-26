@@ -23,8 +23,9 @@ public:
 		return m_gravity_data;
 	};
 
-	void UpdateCameraPTR(Camera* ptr_) { m_curr_camera_ptr = ptr_; };
+	void UpdateCameraPTR(Camera* ptr_) { m_curr_camera_ptr = ptr_; }
 	Camera* GetCurrCameraPTR() { return m_curr_camera_ptr; }
+
 
 protected:
 

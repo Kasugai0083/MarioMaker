@@ -56,10 +56,6 @@ int APIENTRY WinMain(HINSTANCE ,HINSTANCE, LPSTR, INT)
 		scene_ctr->Update();
 		scene_ctr->Draw();
 
-		// カメラのアップデート
-		UpdateCamera();
-
-
 		dx_mgr->EndDraw();
 
 #if 0

@@ -9,7 +9,7 @@ void GameScene::Init()
 {
 	m_drawer2d.LoadTexture("Res/Game/game_main_bg.png");
 
-	m_map_mgr.Init();
+	m_map_mgr.Init("Csv/stage01.csv");
 
 	// ƒV[ƒ“‘JˆÚ
 	m_state = SceneState::UPDATE;

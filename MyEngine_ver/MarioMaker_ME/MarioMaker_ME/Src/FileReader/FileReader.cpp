@@ -1,4 +1,5 @@
 #include "FileReader.h"
+#include "../Data/Accessor.h"
 #include <iostream>
 #include <fstream> //for ifstream
 #include <sstream> //for istringstream
@@ -6,9 +7,9 @@
 
 FileReader::FileReader()
 {
-	for (int i = 0; i < MAP_H; i++)
+	for (int i = 0; i < MAX_MAP_H; i++)
 	{
-		for (int j = 0; j < MAP_W; j++)
+		for (int j = 0; j < MAX_MAP_W; j++)
 		{
 			tmp_map[i][j] = 0;
 		}
@@ -22,6 +23,9 @@ FileReader::~FileReader()
 
 void FileReader::LoadCSV(std::string fileName_) 
 {
+	Accessor* acs = Accessor::GetInstance();
+	if (!acs) { return; }
+
 	// ifstream => コンストラクタでファイル読み込み
 	std::ifstream ifs(fileName_);
 
@@ -29,7 +33,7 @@ void FileReader::LoadCSV(std::string fileName_)
 	std::string str;
 
 	// CSV 幅分の配列を確保
-	int num[MAP_W];
+	int num[MAX_MAP_W];
 
 	int j = 0;
 
@@ -46,16 +50,18 @@ void FileReader::LoadCSV(std::string fileName_)
 		std::istringstream iss(str);
 
 		// iss の要素を順番に取り出し
-		for (int i = 0; i < 40; i++)
+		for (int i = 0; i < MAX_MAP_W; i++)
 		{
 			iss >> num[i];
+			if (!num[i]) { m_map_size.x = i + 2; }
 		}
-		for (int i = 0; i < 40; i++)
+		for (int i = 0; i < MAX_MAP_W; i++)
 		{
 			tmp_map[j][i] = num[i];
 		}
 		j++;
 	}
+	m_map_size.y = j;
 
 }
 
@@ -70,9 +76,9 @@ void FileReader::SaveCSV(std::string fileName_)
 	// 1 行読み込み
 	// str に ifs から読み込んだ行を格納
 
-	for (int i = 0; i < MAP_H; i++) 
+	for (int i = 0; i < MAX_MAP_H; i++) 
 	{
-		for (int j = 0; j < MAP_W; j++) 
+		for (int j = 0; j < MAX_MAP_W; j++) 
 		{
 			oss << tmp_map[i][j] << ",";
 		}
@@ -84,11 +90,11 @@ void FileReader::SaveCSV(std::string fileName_)
 }
 
 
-void FileReader::GetMapCSV(int* map_[MAP_H][MAP_W])
+void FileReader::GetMapCSV(int* map_[MAX_MAP_H][MAX_MAP_W])
 {
-	for (int i = 0; i < MAP_H; i++)
+	for (int i = 0; i < MAX_MAP_H; i++)
 	{
-		for (int j = 0; j < MAP_W; j++)
+		for (int j = 0; j < MAX_MAP_W; j++)
 		{
 			*map_[i][j] = tmp_map[i][j];
 		}

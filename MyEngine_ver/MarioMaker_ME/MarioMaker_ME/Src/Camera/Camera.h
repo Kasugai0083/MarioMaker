@@ -3,30 +3,12 @@
 #define CAMERA_H_
 
 #include "../Utility/Vec2.h"
+#include "../Utility/Grid.h"
 #include "../Engine/Device.h"
+#include "../Data/GameData.h"
 
-#define FIELD_WIDHT (WIN_W * 2)	//!< フィールドの横幅
-#define FIELD_HEIGHT (WIN_H * 2)	//!< フィールドの縦幅
-
-/** @brief カメラ座標取得関数 */
-t_Vec2 GetCameraPos();
-
-/**
-* @brief ワールド座標 => スクリーン座標変換関数@n
-* 引数で渡された座標をスクリーン座標に変換する
-* @return 変換後の座標
-* @param[in] pos 変換前の座標
-*/
-t_Vec2 ConvertPositionWorldToScreen(t_Vec2 pos);
-
-/**
-* @brief カメラ更新関数@n
-* カメラを更新する
-*/
-void UpdateCamera();
-
-
-
+#define FIELD_WIDHT (MAX_MAP_W * MAP_CHIP_SIZE)	//!< フィールドの横幅
+#define FIELD_HEIGHT (MAX_MAP_H * MAP_CHIP_SIZE)	//!< フィールドの縦幅
 
 class Camera
 {
@@ -41,11 +23,11 @@ public:
 	t_Vec2 ConvertScreen(t_Vec2 pos_);
 	t_Vec2 GetPosition() { return m_pos; }
 	
-	void SetCameraPosition(t_Vec2 pos_) { if (!this) { return; } m_pos = pos_; };
+	void SetMapSize(t_Grid size_) { m_map_size = size_; }
 
 private:
 	t_Vec2 m_pos;
-
+	t_Grid m_map_size;
 };
 
 #endif

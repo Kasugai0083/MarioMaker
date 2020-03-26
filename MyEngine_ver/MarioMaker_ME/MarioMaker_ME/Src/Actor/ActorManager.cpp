@@ -4,7 +4,7 @@
 #include "..//Utility/Calculator/Calculator.h"
 #include "../Data/Accessor.h"
 
-void ActorManager::Init() 
+void ActorManager::Init(std::string map_name_)
 {
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; };
@@ -13,11 +13,12 @@ void ActorManager::Init()
 
 	FileReader file_reader;
 
-	file_reader.LoadCSV("Csv/stage01.csv");
+	file_reader.LoadCSV(map_name_);
+	m_camera_ptr->SetMapSize(file_reader.GetMapSize());
 
-	for (int i = 0; i < MAP_H; i++)
+	for (int i = 0; i < MAX_MAP_H; i++)
 	{
-		for (int j = 0; j < MAP_W; j++)
+		for (int j = 0; j < MAX_MAP_W; j++)
 		{
 			m_map[i][j] = new int(0);
 		}
@@ -28,9 +29,9 @@ void ActorManager::Init()
 	float pos_x = 0.f;
 	float pos_y = 0.f;
 
-	for (int i = 0; i < MAP_H; i++)
+	for (int i = 0; i < MAX_MAP_H; i++)
 	{
-		for (int j = 0; j < MAP_W; j++)
+		for (int j = 0; j < MAX_MAP_W; j++)
 		{
 			pos_x = (float)j * MAP_CHIP_SIZE;
 			pos_y = (float)i * MAP_CHIP_SIZE;
@@ -282,9 +283,9 @@ void ActorManager::Update()
 void ActorManager::Release()
 {
 	// m_map‚Ì‰ð•ú
-	for (int i = 0; i < MAP_H; i++)
+	for (int i = 0; i < MAX_MAP_H; i++)
 	{
-		for (int j = 0; j < MAP_W; j++)
+		for (int j = 0; j < MAX_MAP_W; j++)
 		{
 			delete m_map[i][j];
 			m_map[i][j] = nullptr;

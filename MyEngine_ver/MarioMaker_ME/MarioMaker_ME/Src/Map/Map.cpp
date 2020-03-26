@@ -6,11 +6,13 @@ MapManager::~MapManager()
 {
 }
 
-void MapManager::Init() 
+void MapManager::Init(std::string map_name_)
 {
 	m_gravity = GRAVITY;
 	
-	m_actor_mgr.Init();
+	m_map_name = map_name_;
+
+	m_actor_mgr.Init(m_map_name);
 
 }
 
