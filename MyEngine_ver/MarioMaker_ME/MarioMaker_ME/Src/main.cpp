@@ -5,6 +5,7 @@
 #include "Scene/SceneController.h"
 #include "Utility/Debug.h"
 #include "Data/Accessor.h"
+#include "Camera/Camera.h"
 #include <string>
 #include <windows.h>
 #include <d3d9.h>
@@ -54,6 +55,10 @@ int APIENTRY WinMain(HINSTANCE ,HINSTANCE, LPSTR, INT)
 		// シーン制御
 		scene_ctr->Update();
 		scene_ctr->Draw();
+
+		// カメラのアップデート
+		UpdateCamera();
+
 
 		dx_mgr->EndDraw();
 

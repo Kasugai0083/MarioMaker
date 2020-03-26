@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Camera\Camera.cpp" />
     <ClCompile Include="Src\Utility\Calculator\Calculator.cpp" />
     <ClCompile Include="Src\Actor\ActorManager.cpp" />
     <ClCompile Include="Src\FileReader\FileReader.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Src\Scene\Title\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Camera\Camera.h" />
     <ClInclude Include="Src\Utility\Calculator\Calculator.h" />
     <ClInclude Include="Src\Actor\ActorBase.h" />
     <ClInclude Include="Src\Actor\ActorManager.h" />
