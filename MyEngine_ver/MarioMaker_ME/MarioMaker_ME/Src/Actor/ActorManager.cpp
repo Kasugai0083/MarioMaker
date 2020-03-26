@@ -50,6 +50,23 @@ void ActorManager::Init(std::string map_name_)
 			{
 				m_actors["エネミー"].push_back(new Enemy(chip_pos, "Res/Game/Mapchip/enemy.png"));
 			}
+			if (*m_map[i][j] == 9)
+			{
+				if (i - 1 < 0) { return; }
+
+				if (*m_map[i - 1][j] != 9) 
+				{
+					m_actors["上"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal1.png"));
+				}
+				else if ( *m_map[i + 1][j] != 9)
+				{
+					m_actors["下"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal3.png"));
+				}
+				else 
+				{
+					m_actors["中"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal2.png"));
+				}
+			}
 		}
 	}
 
@@ -62,13 +79,26 @@ void ActorManager::Draw()
 	{
 		i->Draw("Res/Game/Mapchip/block.png", m_camera_ptr);
 	}
-	for(auto i : m_actors["プレイヤー"])
-	{
-		i->Draw("Res/Game/Mapchip/player.png", m_camera_ptr);
-	}
+
 	for(auto i : m_actors["エネミー"])
 	{
 		i->Draw("Res/Game/Mapchip/enemy.png", m_camera_ptr);
+	}
+	for(auto i : m_actors["上"])
+	{
+		i->Draw("Res/Game/Mapchip/Goal1.png", m_camera_ptr);
+	}
+	for(auto i : m_actors["中"])
+	{
+		i->Draw("Res/Game/Mapchip/Goal2.png", m_camera_ptr);
+	}
+	for(auto i : m_actors["下"])
+	{
+		i->Draw("Res/Game/Mapchip/Goal3.png", m_camera_ptr);
+	}
+	for (auto i : m_actors["プレイヤー"])
+	{
+		i->Draw("Res/Game/Mapchip/player.png", m_camera_ptr);
 	}
 }
 

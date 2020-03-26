@@ -2,6 +2,7 @@
 
 #include "ActorBase.h"
 #include "Block/Block.h"
+#include "Goal/Goal.h"
 #include "Character/Enemy/Enemy.h"
 #include "Character/Player/Player.h"
 #include "../Camera/Camera.h"

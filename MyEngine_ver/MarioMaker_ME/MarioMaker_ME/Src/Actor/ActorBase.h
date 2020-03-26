@@ -31,6 +31,7 @@ public:
 	virtual ~ActorBase() {};	//!< デストラクタ	
 
 	virtual void Init(Pos2 pos_, std::string fileName_) = 0;	//!< 初期化
+	virtual void Init(Pos2 pos_) {};	//!< 初期化
 	virtual void Update() = 0;									//!< 更新
 	virtual void Draw(std::string fileName_, Camera* camera_) = 0;				//!< 描画
 	virtual void Release() = 0;									//!< 解放
