@@ -21,10 +21,10 @@ public:
 	};
 	~Block() override;	//!< デストラクタ	
 
-	void Init(Pos2 pos_, std::string fileName_)override;	//!< 初期化
-	void Update()override;									//!< 更新
-	void Draw(std::string fileName_)override;				//!< 描画
-	void Release()override;									//!< 解放
+	void Init(Pos2 pos_, std::string fileName_)override;		//!< 初期化
+	void Update()override;										//!< 更新
+	void Draw(std::string fileName_, Camera* camera_)override;	//!< 描画
+	void Release()override;										//!< 解放
 
 private:
 

@@ -3,6 +3,7 @@
 #include "../Engine/Graphics/Drawer2D.h"
 #include "..//Data/GameData.h"
 #include "../Actor/ActorManager.h"
+#include "../Camera/Camera.h"
 
 #include <vector>
 
@@ -11,10 +12,12 @@
 * マップと登場するアクターを制御するクラス
 */
 
+
+
 class MapManager
 {
 public:
-	MapManager()	//!< コンストラクタ
+	MapManager() 	//!< コンストラクタ
 	{
 	};
 	~MapManager();	//!< デストラクタ
@@ -27,5 +30,6 @@ public:
 private:
 	float m_gravity;			//!< マップの重力
 	ActorManager m_actor_mgr;	//!< アクターを管理
+	Camera m_map_camera;
 };
 

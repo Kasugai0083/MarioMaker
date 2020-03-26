@@ -21,7 +21,7 @@ public:
 
 	void Init(Pos2 pos_, std::string fileName_) override;	//!< ‰Šú‰»
 	void Update() override;									//!< XV
-	void Draw(std::string fileName_) override;				//!< •`‰æ
+	void Draw(std::string fileName_, Camera* camera_)override;	//!< •`‰æ
 	void Release() override;								//!< ‰ð•ú
 
 private:

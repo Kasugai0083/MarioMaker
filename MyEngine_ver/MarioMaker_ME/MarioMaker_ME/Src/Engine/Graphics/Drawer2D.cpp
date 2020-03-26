@@ -1,5 +1,5 @@
 #include "Drawer2D.h"
-#include "../../Camera/Camera.h"
+
 #include <vector>
 
 void Drawer2D::DrawTexture(t_VertexPos v_, std::string fileName_)
@@ -68,8 +68,25 @@ void Drawer2D::DrawTexture(Pos2 pos_, std::string fileName_)
 	if (!mgr) { return; }
 
 	t_VertexPos tex_pos;
+
+	if (m_ptr_tex_list[fileName_]) {
+		tex_pos.pos.x = pos_.x;
+		tex_pos.pos.y = pos_.y;
+
+		tex_pos.tex_pos_start = Pos2(0.f, 0.f);
+		tex_pos.tex_pos_end = Pos2(m_ptr_tex_list[fileName_]->width, m_ptr_tex_list[fileName_]->height);
+
+		DrawTexture(tex_pos, fileName_);
+	}
+}
+void Drawer2D::DrawTexture(Pos2 pos_, std::string fileName_, Camera* camera_)
+{
+	DxManager* mgr = DxManager::GetInstance();
+	if (!mgr) { return; }
+
+	t_VertexPos tex_pos;
 	
-	t_Vec2 screen_pos = ConvertPositionWorldToScreen(pos_);
+	t_Vec2 screen_pos = camera_->ConvertScreen(pos_);
 
 	if (m_ptr_tex_list[fileName_]) {
 		tex_pos.pos.x = screen_pos.x;

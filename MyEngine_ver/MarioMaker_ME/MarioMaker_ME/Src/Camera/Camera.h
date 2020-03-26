@@ -25,4 +25,27 @@ t_Vec2 ConvertPositionWorldToScreen(t_Vec2 pos);
 */
 void UpdateCamera();
 
+
+
+
+class Camera
+{
+
+public:
+	Camera() { Init(t_Vec2(WIN_W / 2.0f, WIN_H / 2.0f)); }
+	Camera(t_Vec2 pos_) { Init(pos_); }
+
+	void Init(t_Vec2 pos_);
+	void Update();
+
+	t_Vec2 ConvertScreen(t_Vec2 pos_);
+	t_Vec2 GetPosition() { return m_pos; }
+	
+	void SetCameraPosition(t_Vec2 pos_) { if (!this) { return; } m_pos = pos_; };
+
+private:
+	t_Vec2 m_pos;
+
+};
+
 #endif

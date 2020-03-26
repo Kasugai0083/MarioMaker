@@ -2,6 +2,7 @@
 
 
 #include "DirectX.h"
+#include "../../Camera/Camera.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <string>
@@ -35,6 +36,7 @@ public:
 	* @brief ŠÈˆÕ”Å
 	*/
 	void DrawTexture(Pos2 pos_, std::string fileName_);
+	void DrawTexture(Pos2 pos_, std::string fileName_, Camera* camera_);
 
 
 	/**

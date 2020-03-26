@@ -2,9 +2,15 @@
 #include "../FileReader/FileReader.h"
 #include "..//Engine/Device.h"
 #include "..//Utility/Calculator/Calculator.h"
+#include "../Data/Accessor.h"
 
 void ActorManager::Init() 
 {
+	Accessor* acs = Accessor::GetInstance();
+	if (!acs) { return; };
+
+	m_camera_ptr = acs->GetCurrCameraPTR();
+
 	FileReader file_reader;
 
 	file_reader.LoadCSV("Csv/stage01.csv");
@@ -53,15 +59,15 @@ void ActorManager::Draw()
 {
 	for(auto i : m_actors["ブロック"])
 	{
-		i->Draw("Res/Game/Mapchip/block.png");
+		i->Draw("Res/Game/Mapchip/block.png", m_camera_ptr);
 	}
 	for(auto i : m_actors["プレイヤー"])
 	{
-		i->Draw("Res/Game/Mapchip/player.png");
+		i->Draw("Res/Game/Mapchip/player.png", m_camera_ptr);
 	}
 	for(auto i : m_actors["エネミー"])
 	{
-		i->Draw("Res/Game/Mapchip/enemy.png");
+		i->Draw("Res/Game/Mapchip/enemy.png", m_camera_ptr);
 	}
 }
 

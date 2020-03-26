@@ -32,10 +32,8 @@ void Block::Update()
 	m_state.pos.y += gravity_power;
 
 }
-
-
-void Block::Draw(std::string fileName_) {
-	m_drawer2d.DrawTexture(m_state.pos, fileName_);
+void Block::Draw(std::string fileName_, Camera* camera_) {
+	m_drawer2d.DrawTexture(m_state.pos, fileName_, camera_);
 }
 
 void Block::Release() {

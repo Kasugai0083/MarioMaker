@@ -2,7 +2,8 @@
 #include "..//Utility/Vec2.h"
 #include "..//Engine/Graphics/Drawer2D.h"
 #include "../Data/GameData.h"
-
+#include "../Camera/Camera.h"
+#include "../Data/Accessor.h"
 /**
 * @brief 
 * ゲームに登場する(プレイヤー・エネミー・ブロック)の基底クラス
@@ -31,7 +32,7 @@ public:
 
 	virtual void Init(Pos2 pos_, std::string fileName_) = 0;	//!< 初期化
 	virtual void Update() = 0;									//!< 更新
-	virtual void Draw(std::string fileName_) = 0;				//!< 描画
+	virtual void Draw(std::string fileName_, Camera* camera_) = 0;				//!< 描画
 	virtual void Release() = 0;									//!< 解放
 
 	Pos2 GetPos() { return m_state.pos; }						//!< 座標取得
@@ -50,6 +51,7 @@ public:
 	t_ASta GetState() { return m_state; }			//!< ジャンプフラグの取得
 
 protected:
+
 	t_ActorState m_state;		//!< アクターのステータス
 	Drawer2D m_drawer2d;		//!< 描画クラス		
 };

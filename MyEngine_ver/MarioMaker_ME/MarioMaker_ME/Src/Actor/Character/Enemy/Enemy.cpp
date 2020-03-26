@@ -25,9 +25,9 @@ void Enemy::Update()
 
 }
 
-void Enemy::Draw(std::string fileName_)
+void Enemy::Draw(std::string fileName_, Camera* camera_)
 {
-	m_drawer2d.DrawTexture(m_state.pos, fileName_);
+	m_drawer2d.DrawTexture(m_state.pos, fileName_, camera_);
 }
 
 void Enemy::Release()

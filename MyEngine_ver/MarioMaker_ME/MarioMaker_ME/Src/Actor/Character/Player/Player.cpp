@@ -31,6 +31,9 @@ void Player::Update()
 {
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; }
+
+	m_camera_ptr->SetCameraPosition(m_state.pos);
+
 #if 1
 	// 本番用
 	// ベクトル情報の管理 start
@@ -145,9 +148,9 @@ void Player::Update()
 #endif
 }
 
-void Player::Draw(std::string fileName_)
+void Player::Draw(std::string fileName_, Camera* camera_)
 {
-	m_drawer2d.DrawTexture(m_state.pos, fileName_);
+	m_drawer2d.DrawTexture(m_state.pos, fileName_, camera_);
 
 	// プレイヤー座標を表示 start
 	std::string player_posx_txt = "プレイヤーのX座標 => ";
