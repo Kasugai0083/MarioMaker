@@ -52,13 +52,21 @@ void ActorManager::Init(std::string map_name_)
 			}
 			if (*m_map[i][j] == 9)
 			{
-				if (i - 1 < 0) { return; }
 
-				if (*m_map[i - 1][j] != 9) 
+				bool has_min_num = false, has_max_num = false;
+
+				if (i - 1 < 0) { has_min_num = true; }
+				else if (i + 1 >= MAX_MAP_H) { has_min_num = true; }
+
+				if ((has_min_num || !has_min_num && *m_map[i - 1][j] != 9) && (has_max_num || !has_max_num && *m_map[i + 1][j] != 9))
+				{
+					m_actors["個"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal0.png"));
+				}
+				else if ((has_min_num || !has_min_num && *m_map[i - 1][j] != 9))
 				{
 					m_actors["上"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal1.png"));
 				}
-				else if ( *m_map[i + 1][j] != 9)
+				else if ((has_max_num || !has_max_num && *m_map[i + 1][j] != 9))
 				{
 					m_actors["下"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal3.png"));
 				}
@@ -83,6 +91,10 @@ void ActorManager::Draw()
 	for(auto i : m_actors["エネミー"])
 	{
 		i->Draw("Res/Game/Mapchip/enemy.png", m_camera_ptr);
+	}
+	for(auto i : m_actors["個"])
+	{
+		i->Draw("Res/Game/Mapchip/Goal0.png", m_camera_ptr);
 	}
 	for(auto i : m_actors["上"])
 	{
