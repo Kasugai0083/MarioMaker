@@ -38,6 +38,7 @@ private:
 
 	void PlayerAndBlockCollide();
 	void PlayerAndGoalCollide();
+	void CheckPlayerDeath();
 
 private:
 	int* m_map[MAX_MAP_H][MAX_MAP_W];	//!< Csv‚Ìî•ñ‚ð“Ç‚Ýž‚Ý—p

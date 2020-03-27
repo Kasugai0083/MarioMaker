@@ -330,9 +330,33 @@ void ActorManager::PlayerAndBlockCollide()
 	}
 }
 
+void ActorManager::CheckPlayerDeath()
+{
+	for (auto player : m_actors["プレイヤー"])
+	{
+		if (!player->GetState().is_death) { continue; }
+		*m_clear_ptr = true;
+	}
+}
+
 // 参照 => チェルノブイリ実験場
 void ActorManager::Update()
 {
+	// カメラのアップデート start
+	int count = 0;
+	t_Vec2 sum_pos = t_Vec2(0.f, 0.f);
+	for (auto player : m_actors["プレイヤー"])
+	{
+		count++;
+		sum_pos += player->GetState().pos;
+	}
+	t_Vec2 camera_pos;
+	camera_pos.x = sum_pos.x / (float)count;
+	camera_pos.y = sum_pos.y / (float)count;
+
+	m_camera_ptr->Update(camera_pos);
+	// カメラのアップデート end
+
 	// アクター全体の更新処理 start
 	for (auto i : m_actors)
 	{
@@ -346,23 +370,13 @@ void ActorManager::Update()
 	// ブロックとプレイヤーの当たり
 	PlayerAndBlockCollide();
 	
-	// ゴールとプレイヤーの当たりｄ
+	// ゴールとプレイヤーの当たり
 	PlayerAndGoalCollide();
 
-	// カメラのアップデート start
-	int count = 0;
-	t_Vec2 sum_pos = t_Vec2(0.f,0.f);
-	for (auto player : m_actors["プレイヤー"]) 
-	{
-		count++;
-		sum_pos += player->GetState().pos;
-	}
-	t_Vec2 camera_pos;
-	camera_pos.x = sum_pos.x / (float)count;
-	camera_pos.y = sum_pos.y / (float)count;
+	// プレイヤーが全員死んでるか判定
+	CheckPlayerDeath();
 
-	m_camera_ptr->Update(camera_pos);
-	// カメラのアップデート end
+
 }
 
 void ActorManager::Release()

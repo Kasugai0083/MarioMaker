@@ -21,6 +21,7 @@ typedef struct t_ActorState {
 	float grav_accel;		//!< 重力加速度
 	bool has_on_ground;	//!< 着地しているかどうか
 	t_Vec2 curr_vec;	//!< 現在のベクトル情報
+	bool is_death;	//!< 死亡判定(試験中)
 
 }t_ASta;
 
@@ -56,8 +57,5 @@ protected:
 
 	t_ActorState m_state;		//!< アクターのステータス
 	Drawer2D m_drawer2d;		//!< 描画クラス		
-
-	// 試験中
-	int m_id;				//!< 識別番号
 };
 

@@ -22,6 +22,7 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 	m_state.weight = 1.f;
 	m_state.speed = 0.5f;
 	m_state.jump_power = 5.f;
+	m_state.is_death = false;
 
 	m_count = 0;
 	m_short_jump = false;
@@ -40,8 +41,8 @@ void Player::Update()
 	// ベクトル情報の管理 end
 
 	// 左右の移動処理 start
-	if (Device::KeyOn('D')) 
-	{ 
+	if (Device::KeyOn('D'))
+	{
 		m_state.accel += m_state.speed;
 	}
 	if (Device::KeyOn('A'))
@@ -53,15 +54,15 @@ void Player::Update()
 	if (m_state.accel <= -MAX_SPEED) { m_state.accel = -MAX_SPEED; }
 
 	if (m_state.has_on_ground && m_state.accel > 0.0f)
-	{ 
+	{
 		m_state.accel -= FRICTION;
 		if (m_state.accel < 0.f)
 		{
 			m_state.accel = 0.f;
 		}
 	}
-	else if (m_state.has_on_ground && m_state.accel < 0.0f) 
-	{ 
+	else if (m_state.has_on_ground && m_state.accel < 0.0f)
+	{
 		m_state.accel += FRICTION;
 		if (m_state.accel > 0.f)
 		{
@@ -73,31 +74,31 @@ void Player::Update()
 	// 重力処理 start
 
 		// ジャンプ処理 start
-		if (Device::KeyOn(VK_SPACE)
-			&& m_state.has_on_ground)
-		{
+	if (Device::KeyOn(VK_SPACE)
+		&& m_state.has_on_ground)
+	{
 
-			m_state.grav_accel = -m_state.jump_power;
-			m_state.has_on_ground = false;
-			m_short_jump = true;
+		m_state.grav_accel = -m_state.jump_power;
+		m_state.has_on_ground = false;
+		m_short_jump = true;
 
-		};
+	};
 
-		if (Device::KeyOn(VK_SPACE)
-			&& m_short_jump 
-			&& m_count <= 20)
+	if (Device::KeyOn(VK_SPACE)
+		&& m_short_jump
+		&& m_count <= 20)
 
-		{
-			m_count++;
-			m_state.grav_accel = -m_state.jump_power;
-		}
+	{
+		m_count++;
+		m_state.grav_accel = -m_state.jump_power;
+	}
 
-		if (Device::KeyOff(VK_SPACE)) 
-		{
-			m_short_jump = false;
-		}
-		// ジャンプ処理 end
-	
+	if (Device::KeyOff(VK_SPACE))
+	{
+		m_short_jump = false;
+	}
+	// ジャンプ処理 end
+
 
 	if (m_state.has_on_ground)
 	{
@@ -109,11 +110,18 @@ void Player::Update()
 	m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
 
 	// 重力処理 end
-	
+
 	// 加速度を座標に反映 start
 	m_state.pos.x += m_state.accel;
 	m_state.pos.y += m_state.grav_accel;
 	// 加速度を座標に反映 end
+
+	// フィールド外に出た場合死亡処理 start
+	if(m_state.pos.y >= m_camera_ptr->GetFieldSize().y)
+	{
+		m_state.is_death = true;
+	}
+	// フィールド外に出た場合死亡処理 end
 
 	// ベクトルの計算 start
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
@@ -123,7 +131,7 @@ void Player::Update()
 	}
 	// ベクトルの計算 end
 
-	//m_state.has_on_ground = false;
+
 #else
 	// デバッグ用
 	if (Device::KeyOn('D'))

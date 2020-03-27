@@ -7,9 +7,6 @@
 #include "../Engine/Device.h"
 #include "../Data/GameData.h"
 
-#define FIELD_WIDHT (MAX_MAP_W * MAP_CHIP_SIZE)	//!< フィールドの横幅
-#define FIELD_HEIGHT (MAX_MAP_H * MAP_CHIP_SIZE)	//!< フィールドの縦幅
-
 class Camera
 {
 
@@ -22,6 +19,8 @@ public:
 
 	t_Vec2 ConvertScreen(t_Vec2 pos_);
 	t_Vec2 GetPosition() { return m_pos; }
+
+	t_Grid GetFieldSize() { return m_field_size; }
 	
 	void SetMapSize(t_Grid size_) { m_map_size = size_; }
 
