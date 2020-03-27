@@ -34,6 +34,7 @@ void FileReader::LoadCSV(std::string fileName_)
 
 	// CSV ••ª‚Ì”z—ñ‚ğŠm•Û
 	int num[MAX_MAP_W];
+	for (auto& i : num) { i = 255; }
 
 	int j = 0;
 
@@ -53,7 +54,7 @@ void FileReader::LoadCSV(std::string fileName_)
 		for (int i = 0; i < MAX_MAP_W; i++)
 		{
 			iss >> num[i];
-			if (!num[i]) { m_map_size.x = i + 2; }
+			if (num[i] != 255) { m_map_size.x = i + 1; }
 		}
 		for (int i = 0; i < MAX_MAP_W; i++)
 		{

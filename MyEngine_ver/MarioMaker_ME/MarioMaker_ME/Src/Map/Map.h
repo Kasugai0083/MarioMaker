@@ -32,6 +32,6 @@ private:
 	std::string m_map_name;		//!< マップの名前
 	float m_gravity;			//!< マップの重力
 	ActorManager m_actor_mgr;	//!< アクターを管理
-	Camera m_map_camera;
+	Camera m_map_camera;		//!< マップのカメラ情報
 };
 

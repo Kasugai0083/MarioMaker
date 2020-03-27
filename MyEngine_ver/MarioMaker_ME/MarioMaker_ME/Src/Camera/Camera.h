@@ -28,6 +28,8 @@ public:
 private:
 	t_Vec2 m_pos;
 	t_Grid m_map_size;
+	t_Grid m_field_size;
+
 };
 
 #endif

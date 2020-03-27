@@ -52,7 +52,7 @@ void ActorManager::Init(std::string map_name_)
 			}
 			if (*m_map[i][j] == 9)
 			{
-
+				#pragma region ゴール
 				bool has_min_num = false, has_max_num = false;
 
 				if (i - 1 < 0) { has_min_num = true; }
@@ -74,6 +74,7 @@ void ActorManager::Init(std::string map_name_)
 				{
 					m_actors["中"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal2.png"));
 				}
+				#pragma endregion
 			}
 		}
 	}
@@ -92,26 +93,44 @@ void ActorManager::Draw()
 	{
 		i->Draw("Res/Game/Mapchip/enemy.png", m_camera_ptr);
 	}
-	for(auto i : m_actors["個"])
+
+	#pragma region ゴール
+	for (auto i : m_actors["個"])
 	{
 		i->Draw("Res/Game/Mapchip/Goal0.png", m_camera_ptr);
 	}
-	for(auto i : m_actors["上"])
+	for (auto i : m_actors["上"])
 	{
 		i->Draw("Res/Game/Mapchip/Goal1.png", m_camera_ptr);
 	}
-	for(auto i : m_actors["中"])
+	for (auto i : m_actors["中"])
 	{
 		i->Draw("Res/Game/Mapchip/Goal2.png", m_camera_ptr);
 	}
-	for(auto i : m_actors["下"])
+	for (auto i : m_actors["下"])
 	{
 		i->Draw("Res/Game/Mapchip/Goal3.png", m_camera_ptr);
 	}
+	#pragma endregion
+
 	for (auto i : m_actors["プレイヤー"])
 	{
 		i->Draw("Res/Game/Mapchip/player.png", m_camera_ptr);
 	}
+}
+
+bool SurroundingSurvey(t_ASta actor1_, t_ASta actor2_) 
+{
+	if (
+		actor1_.pos.x >= (actor2_.pos.x - actor2_.size.width)
+		&& actor1_.pos.x <= (actor2_.pos.x + (2 * actor2_.size.width))
+		&& actor1_.pos.y >= (actor2_.pos.y - actor2_.size.height)
+		&& actor1_.pos.y <= (actor2_.pos.y + (2 * actor2_.size.height))
+		)
+	{
+		return true;
+	}
+	return false;
 }
 
 void ActorManager::PlayerAndBlockCollide() 
@@ -131,7 +150,6 @@ void ActorManager::PlayerAndBlockCollide()
 				&& block->GetState().pos.y <= (player->GetState().pos.y + (2 * player->GetState().size.height))
 				)
 			{
-
 #if 1		
 				/**
 				* 4分割処理

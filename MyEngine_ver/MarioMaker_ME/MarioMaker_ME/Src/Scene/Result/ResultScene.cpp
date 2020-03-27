@@ -5,16 +5,15 @@ ResultScene::~ResultScene()
 {
 }
 
-void ResultScene::Init() {
-	m_drawer2d.LoadTexture("Res/bomb.png");
+void ResultScene::Init()
+{
 	m_drawer2d.LoadTexture("Res/Result/result_bg.png");
 
 	m_state = SceneState::UPDATE;
 }
 
-void ResultScene::Update() {
-
-
+void ResultScene::Update() 
+{
 	if (Device::KeyPress(VK_RETURN)) { m_state = SceneState::END; }
 }
 
@@ -41,11 +40,9 @@ SceneID ResultScene::Control() {
 	return SceneID::RESULT;
 }
 
-void ResultScene::Draw() {
-	{
-		t_VertexPos v{ Pos2(WIN_W / 2,WIN_H / 2),Pos2(0.f,0.f),Pos2(256.f, 256.f) };
-		m_drawer2d.DrawTexture(v, "Res/bomb.png");
-	}
+void ResultScene::Draw()
+{
+
 	Pos2 bg_pos(0.f,0.f);
 	m_drawer2d.DrawTexture(bg_pos, "Res/Result/result_bg.png");
 }

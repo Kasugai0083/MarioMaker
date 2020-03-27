@@ -15,7 +15,8 @@ void TitleScene::Init() {
 	m_state = SceneState::UPDATE;
 }
 
-void TitleScene::Update() {
+void TitleScene::Update() 
+{
 
 	if (Device::KeyPress(VK_RETURN)) { m_state = SceneState::END; }
 }

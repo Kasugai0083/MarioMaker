@@ -10,6 +10,9 @@ void GameScene::Init()
 	m_drawer2d.LoadTexture("Res/Game/game_main_bg.png");
 
 	m_map_mgr.Init("Csv/stage01.csv");
+	//m_map_mgr.Init("Csv/stage_long.csv");
+	//m_map_mgr.Init("Csv/stage_small.csv");
+	//m_map_mgr.Init("Csv/stage_small2.csv");
 
 	// ÉVÅ[ÉìëJà⁄
 	m_state = SceneState::UPDATE;
@@ -19,7 +22,8 @@ void GameScene::Update() {
 
 	m_map_mgr.Update();
 
-	if (Device::KeyPress(VK_RETURN)) { m_state = SceneState::END; }
+	if (Device::KeyPress(VK_RETURN)) { m_can_next_scene = true; }
+	SwitchEnd();
 }
 
 SceneID GameScene::End() {
