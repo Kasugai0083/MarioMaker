@@ -2,6 +2,15 @@
 
 #include "../ActorBase.h"
 
+enum class GoalType
+{
+	INDIVIDUAL,
+	UP,
+	MIDDLE,
+	DOWN,
+	ETC
+};
+
 class Goal : public ActorBase
 {
 public:
@@ -9,13 +18,11 @@ public:
 	{
 		Init(pos_, fileName_);		//!< ‰Šú‰»
 	};
-	//Goal(Pos2 pos_, std::string fileName1_, std::string fileName2_, std::string fileName3_)
-	//{
-	//	Init(pos_);
-	//	m_drawer2d.LoadTexture(fileName1_);
-	//	m_drawer2d.LoadTexture(fileName2_);
-	//	m_drawer2d.LoadTexture(fileName3_);
-	//};
+	Goal(Pos2 pos_, int id_,std::vector<std::string> name_list_)
+	{
+		Init(pos_);
+		for (auto i : name_list_) { m_drawer2d.LoadTexture(i); }
+	};
 	~Goal()override;
 
 	void Init(Pos2 pos_)override;		//!< ‰Šú‰»
@@ -24,6 +31,5 @@ public:
 	void Draw(std::string fileName_, Camera* camera_)override;	//!< •`‰æ
 	void Release()override;										//!< ‰ð•ú
 private:
-
 };
 

@@ -16,8 +16,10 @@ void main()
 	test_map["‚¤"].push_back(new int(3));
 
 #if 1
+
+	string test = "‚ ";
 	// Draw ‚ÌŽÀŒ±
-	for(auto i: test_map["‚ "])
+	for(auto i: test_map.at(test))
 	{
 		cout << *i << endl;
 	}

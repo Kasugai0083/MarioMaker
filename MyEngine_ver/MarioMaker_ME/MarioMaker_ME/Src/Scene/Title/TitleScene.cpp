@@ -18,7 +18,9 @@ void TitleScene::Init() {
 void TitleScene::Update() 
 {
 
-	if (Device::KeyPress(VK_RETURN)) { m_state = SceneState::END; }
+	if (Device::KeyPress(VK_RETURN)) { m_can_next_scene = true; }
+	SwitchEnd();
+
 }
 
 SceneID TitleScene::End() {

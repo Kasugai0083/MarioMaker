@@ -28,10 +28,12 @@ public:
 	void Draw();	//!< 描画
 	void Release();	//!< 解放
 
+	bool GetHasClear() { return m_has_clear; }
 private:
 	std::string m_map_name;		//!< マップの名前
 	float m_gravity;			//!< マップの重力
 	ActorManager m_actor_mgr;	//!< アクターを管理
 	Camera m_map_camera;		//!< マップのカメラ情報
+	bool m_has_clear;			//!< マップのクリア情報
 };
 

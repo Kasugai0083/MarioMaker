@@ -155,16 +155,6 @@ ForceHit Calculator::ForceRectCollision(t_ASta obj1_, t_ASta obj2_)
 			return ForceHit::LEFT_SIDE;
 		}
 
-	
-	//else if (
-	//	obj1_.curr_vec.y > 0
-	//	&& obj1_right.x >= obj2_left.x + CLEARANCE
-	//	&& obj1_left.x <= obj2_right.x - CLEARANCE
-	//	&& obj1_bot.y < obj2_top.y
-	//	)
-	//{
-	//	return ForceHit::NONE;
-	//}
 	return ForceHit::NONE;
 }
 

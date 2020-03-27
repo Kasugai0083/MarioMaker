@@ -133,6 +133,33 @@ bool SurroundingSurvey(t_ASta actor1_, t_ASta actor2_)
 	return false;
 }
 
+void ActorManager::PlayerAndGoalCollide()
+{
+	for (auto player : m_actors["プレイヤー"])
+	{
+		std::vector<std::string> type_string;
+		type_string.push_back("個");
+		type_string.push_back("上");
+		type_string.push_back("中");
+		type_string.push_back("下");
+
+		for (auto string : type_string)
+		{
+			for (auto goal : m_actors[string])
+			{
+				if (SurroundingSurvey(goal->GetState(), player->GetState()))
+				{
+  					if (Calculator::ForceRectCollision(player->GetState(), goal->GetState()) != ForceHit::NONE)
+					{
+						*m_clear_ptr = true;
+					}
+				}
+			}
+		}
+
+	}
+}
+
 void ActorManager::PlayerAndBlockCollide() 
 {
 	// ブロックとプレイヤーの当たり start
@@ -143,12 +170,7 @@ void ActorManager::PlayerAndBlockCollide()
 		for (auto player : m_actors["プレイヤー"])
 		{
 			// 周辺調査
-			if (
-				block->GetState().pos.x >= (player->GetState().pos.x - player->GetState().size.width)
-				&& block->GetState().pos.x <= (player->GetState().pos.x + (2 * player->GetState().size.width))
-				&& block->GetState().pos.y >= (player->GetState().pos.y - player->GetState().size.height)
-				&& block->GetState().pos.y <= (player->GetState().pos.y + (2 * player->GetState().size.height))
-				)
+			if (SurroundingSurvey(block->GetState(), player->GetState()))
 			{
 #if 1		
 				/**
@@ -303,8 +325,6 @@ void ActorManager::PlayerAndBlockCollide()
 					player->SetPos(Pos2(player_x, player_y));
 				}
 #endif
-
-
 			}
 		}
 	}
@@ -326,6 +346,10 @@ void ActorManager::Update()
 	// ブロックとプレイヤーの当たり
 	PlayerAndBlockCollide();
 	
+	// ゴールとプレイヤーの当たりｄ
+	PlayerAndGoalCollide();
+
+	// カメラのアップデート start
 	int count = 0;
 	t_Vec2 sum_pos = t_Vec2(0.f,0.f);
 	for (auto player : m_actors["プレイヤー"]) 
@@ -338,6 +362,7 @@ void ActorManager::Update()
 	camera_pos.y = sum_pos.y / (float)count;
 
 	m_camera_ptr->Update(camera_pos);
+	// カメラのアップデート end
 }
 
 void ActorManager::Release()

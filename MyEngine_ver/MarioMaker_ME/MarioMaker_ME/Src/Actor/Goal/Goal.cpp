@@ -45,10 +45,12 @@ void Goal::Update()
 	m_state.pos.y += gravity_power;
 
 }
-void Goal::Draw(std::string fileName_, Camera* camera_) {
+void Goal::Draw(std::string fileName_, Camera* camera_) 
+{
 	m_drawer2d.DrawTexture(m_state.pos, fileName_, camera_);
 }
 
-void Goal::Release() {
+void Goal::Release() 
+{
 	m_drawer2d.AllRelease();
 }
