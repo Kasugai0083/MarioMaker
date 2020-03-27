@@ -6,6 +6,31 @@ Player::~Player()
 {
 }
 
+void Player::Init(Pos2 pos_)
+{
+	
+	for(auto i : m_name_list)
+	{
+		m_drawer2d.LoadTexture(*i.second);
+	}
+
+	// 構造体を全て 0 で初期化
+	ZeroMemory(&m_state, sizeof(t_ActorState));
+
+	m_state.pos.x = pos_.x;
+	m_state.pos.y = pos_.y;
+
+	m_state.size.height = MAP_CHIP_SIZE;
+	m_state.size.width = MAP_CHIP_SIZE;
+
+	m_state.weight = 1.f;
+	m_state.speed = 0.5f;
+	m_state.jump_power = 5.f;
+	m_state.is_death = false;
+
+	m_count = 0;
+	m_short_jump = false;
+}
 void Player::Init(Pos2 pos_, std::string fileName_)
 {
 	m_drawer2d.LoadTexture(fileName_);
@@ -155,10 +180,49 @@ void Player::Update()
 #endif
 }
 
+
+void Player::Draw()
+{
+
+	m_drawer2d.DrawTexture(m_state.pos, *m_name_list["移動"], m_camera_ptr);
+
+
+	// プレイヤー座標を表示 start
+	std::string player_posx_txt = "プレイヤーのX座標 => ";
+	player_posx_txt += std::to_string(m_state.pos.x);
+	std::string player_posy_txt = "プレイヤーのY座標 => ";
+	player_posy_txt += std::to_string(m_state.pos.y);
+	std::string player_grv_txt = "重力加速度 => ";
+	player_grv_txt += std::to_string(m_state.grav_accel);
+	std::string player_acs_txt = "加速度 => ";
+	player_acs_txt += std::to_string(m_state.accel);
+	std::string player_ground_txt = "プレイヤーの着地状況 => ";
+
+	std::string ground_txt;
+	if (m_state.has_on_ground)
+	{
+		ground_txt = "着地";
+	}
+	else
+	{
+		ground_txt = "空中";
+	}
+
+	player_ground_txt += ground_txt;
+
+	m_drawer2d.DrawFont(Pos2(100.f, 50.f), player_posx_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 100.f), player_posy_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 150.f), player_grv_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 200.f), player_acs_txt);
+	m_drawer2d.DrawFont(Pos2(100.f, 250.f), player_ground_txt);
+	// プレイヤー座標を表示 end
+
+}
+
+
 void Player::Draw(std::string fileName_, Camera* camera_)
 {
 	m_drawer2d.DrawTexture(m_state.pos, fileName_, camera_);
-
 	// プレイヤー座標を表示 start
 	std::string player_posx_txt = "プレイヤーのX座標 => ";
 	player_posx_txt += std::to_string(m_state.pos.x);

@@ -38,13 +38,21 @@ void ActorManager::Init(std::string map_name_)
 
 			Pos2 chip_pos(pos_x, pos_y);
 
+			#pragma region プレイヤー画像読み込み試験中
+			std::map<std::string, std::string*> player_grp_list;
+
+			player_grp_list["移動"] = new std::string("Res/Game/Mapchip/player.png");
+			player_grp_list["死亡"] = new std::string("Res/Game/Mapchip/player_death.png");
+
+			#pragma endregion
+
 			if (*m_map[i][j] == 1)
 			{
 				m_actors["ブロック"].push_back(new Block(chip_pos, "Res/Game/Mapchip/block.png"));
 			}
 			if (*m_map[i][j] == 2)
 			{
-				m_actors["プレイヤー"].push_back(new Player(chip_pos, "Res/Game/Mapchip/player.png"));
+				m_actors["プレイヤー"].push_back(new Player(chip_pos, player_grp_list));
 			}
 			if (*m_map[i][j] == 3)
 			{
@@ -115,7 +123,8 @@ void ActorManager::Draw()
 
 	for (auto i : m_actors["プレイヤー"])
 	{
-		i->Draw("Res/Game/Mapchip/player.png", m_camera_ptr);
+		i->Draw();
+		//i->Draw("Res/Game/Mapchip/player.png", m_camera_ptr);
 	}
 }
 

@@ -34,8 +34,8 @@ public:
 	virtual void Init(Pos2 pos_, std::string fileName_) = 0;	//!< ‰Šú‰»
 	virtual void Init(Pos2 pos_) {};	//!< ‰Šú‰»
 	virtual void Update() = 0;									//!< XV
+	virtual void Draw() {};				//!< •`‰æ
 	virtual void Draw(std::string fileName_, Camera* camera_) = 0;				//!< •`‰æ
-	virtual void Draw(int id_, Camera* camera_) {};				//!< •`‰æ(ŽŽŒ±’†)
 	virtual void Release() = 0;									//!< ‰ð•ú
 
 	Pos2 GetPos() { return m_state.pos; }						//!< À•WŽæ“¾
