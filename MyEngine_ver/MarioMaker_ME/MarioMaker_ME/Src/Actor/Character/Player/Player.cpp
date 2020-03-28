@@ -26,7 +26,7 @@ void Player::Init(Pos2 pos_)
 	m_state.weight = 1.f;
 	m_state.speed = 0.5f;
 	m_state.jump_power = 5.f;
-	m_state.is_death = false;
+	m_state.is_death = true;
 
 	m_count = 0;
 	m_short_jump = false;
@@ -58,6 +58,12 @@ void Player::Update()
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; }
 
+	if (m_state.is_death) 
+	{ 
+		static int count = 0;
+
+		return; 
+	}
 
 #if 1
 	// 本番用
@@ -184,8 +190,14 @@ void Player::Update()
 void Player::Draw()
 {
 
-	m_drawer2d.DrawTexture(m_state.pos, *m_name_list["移動"], m_camera_ptr);
-
+	if(m_state.is_death)
+	{
+		m_drawer2d.DrawTexture(m_state.pos, *m_name_list["死亡"], m_camera_ptr);
+	}
+	else
+	{
+		m_drawer2d.DrawTexture(m_state.pos, *m_name_list["移動"], m_camera_ptr);
+	}
 
 	// プレイヤー座標を表示 start
 	std::string player_posx_txt = "プレイヤーのX座標 => ";

@@ -383,7 +383,7 @@ void ActorManager::Update()
 	PlayerAndGoalCollide();
 
 	// プレイヤーが全員死んでるか判定
-	CheckPlayerDeath();
+	//CheckPlayerDeath();
 
 
 }
