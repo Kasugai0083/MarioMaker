@@ -30,7 +30,7 @@ public:
 	void Release();	//!< 解放
 
 	void GetCameraPTR(Camera* camera_) { m_camera_ptr = camera_; } //!< カメラ情報を取得
-	void GetClearPTR(bool* clear_) { m_clear_ptr = clear_; } //!< カメラ情報を取得
+	void GetClearPTR(bool* clear_) { m_clear_ptr = clear_; }	   //!< シーンのクリア情報を取得
 private:
 	/**
 	* 外部で使用しない関数群

@@ -48,6 +48,7 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 	m_state.speed = 0.5f;
 	m_state.jump_power = 5.f;
 	m_state.is_death = false;
+	m_state.can_next_scene = false;
 
 	m_count = 0;
 	m_short_jump = false;
@@ -61,6 +62,18 @@ void Player::Update()
 	if (m_state.is_death) 
 	{ 
 		static int count = 0;
+
+		m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
+
+		m_state.pos.y += m_state.grav_accel;
+
+		count++;
+
+		if(count >= DEATH_ANIMATION_TIME)
+		{
+			count = 0;
+			m_state.can_next_scene = true;
+		}
 
 		return; 
 	}

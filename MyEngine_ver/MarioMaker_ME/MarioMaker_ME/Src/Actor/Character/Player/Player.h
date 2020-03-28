@@ -47,6 +47,7 @@ public:
 private:
 	int m_count;
 	bool m_short_jump;
+
 	Camera* m_camera_ptr;
 
 	// ŽŽŒ±’†

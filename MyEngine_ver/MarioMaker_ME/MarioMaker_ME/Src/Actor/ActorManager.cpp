@@ -178,6 +178,7 @@ void ActorManager::PlayerAndBlockCollide()
 	{
 		for (auto player : m_actors["プレイヤー"])
 		{
+			if (player->GetState().is_death) { return; }
 			// 周辺調査
 			if (SurroundingSurvey(block->GetState(), player->GetState()))
 			{
@@ -343,8 +344,7 @@ void ActorManager::CheckPlayerDeath()
 {
 	for (auto player : m_actors["プレイヤー"])
 	{
-		if (!player->GetState().is_death) { continue; }
-		*m_clear_ptr = true;
+		if (player->GetState().can_next_scene) { *m_clear_ptr = true; }
 	}
 }
 
@@ -383,7 +383,7 @@ void ActorManager::Update()
 	PlayerAndGoalCollide();
 
 	// プレイヤーが全員死んでるか判定
-	//CheckPlayerDeath();
+	CheckPlayerDeath();
 
 
 }
