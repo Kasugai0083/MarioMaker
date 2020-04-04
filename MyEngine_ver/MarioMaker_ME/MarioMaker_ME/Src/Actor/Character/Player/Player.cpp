@@ -54,29 +54,44 @@ void Player::Init(Pos2 pos_, std::string fileName_)
 	m_short_jump = false;
 }
 
+bool Player::DeathAnimation()
+{
+	Accessor* acs = Accessor::GetInstance();
+	if (!acs) { return false; }
+
+	if (m_state.is_death)
+	{
+		static int count = 0;
+
+		if (count == DEATH_WAIT)
+		{
+			m_state.grav_accel -= m_state.jump_power;
+		}
+		else if (count >= DEATH_ANIMATION_TIME)
+		{
+			count = 0;
+			m_state.can_next_scene = true;
+		}
+		else if (count > DEATH_WAIT)
+		{
+			m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
+
+			m_state.pos.y += m_state.grav_accel;
+		}
+
+		count++;
+
+		return true;
+	}
+	return false;
+}
+
 void Player::Update()
 {
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return; }
 
-	if (m_state.is_death) 
-	{ 
-		static int count = 0;
-
-		m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
-
-		m_state.pos.y += m_state.grav_accel;
-
-		count++;
-
-		if(count >= DEATH_ANIMATION_TIME)
-		{
-			count = 0;
-			m_state.can_next_scene = true;
-		}
-
-		return; 
-	}
+	if (DeathAnimation()) { return; }
 
 #if 1
 	// –{”Ô—p

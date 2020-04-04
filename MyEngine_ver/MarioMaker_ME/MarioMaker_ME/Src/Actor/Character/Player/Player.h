@@ -44,6 +44,12 @@ public:
 	void Draw(std::string fileName_, Camera* camera_) override;				//!< 描画
 	void Release() override;								//!< 解放
 
+private:	//!< クラス内関数
+	/**
+	* @brief 死亡時のアニメーション,シーン遷移に必要なパラメータを変更
+	*/
+	bool DeathAnimation();
+
 private:
 	int m_count;
 	bool m_short_jump;

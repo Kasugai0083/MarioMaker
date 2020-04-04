@@ -16,4 +16,6 @@ const float MAX_SPEED = 6.f;
 const float FRICTION = 0.3f;
 
 // 死亡アニメーションの長さ
-const int DEATH_ANIMATION_TIME = 240;
+const int DEATH_ANIMATION_TIME = 180;
+// 死亡アニメーションが開始するまでの時間
+const int DEATH_WAIT = 16;
