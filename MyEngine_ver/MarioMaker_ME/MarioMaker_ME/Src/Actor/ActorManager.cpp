@@ -46,6 +46,16 @@ void ActorManager::Init(std::string map_name_)
 
 			#pragma endregion
 
+			#pragma region ƒS[ƒ‹‰æ‘œ“Ç‚İ‚İŒ±’†
+			std::map<std::string, std::string*> goal_grp_list;
+
+			goal_grp_list["ŒÂ"] = new std::string("Res/Game/Mapchip/Goal0.png");
+			goal_grp_list["ã"] = new std::string("Res/Game/Mapchip/Goal1.png");
+			goal_grp_list["’†"] = new std::string("Res/Game/Mapchip/Goal2.png");
+			goal_grp_list["‰º"] = new std::string("Res/Game/Mapchip/Goal3.png");
+
+			#pragma endregion
+
 			if (*m_map[i][j] == 1)
 			{
 				m_actors["ƒuƒƒbƒN"].push_back(new Block(chip_pos, "Res/Game/Mapchip/block.png"));
@@ -68,19 +78,19 @@ void ActorManager::Init(std::string map_name_)
 
 				if ((has_min_num || !has_min_num && *m_map[i - 1][j] != 9) && (has_max_num || !has_max_num && *m_map[i + 1][j] != 9))
 				{
-					m_actors["ŒÂ"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal0.png"));
+					m_actors["ƒS[ƒ‹"].push_back(new Goal(chip_pos, GoalType::INDIVIDUAL, goal_grp_list));
 				}
 				else if ((has_min_num || !has_min_num && *m_map[i - 1][j] != 9))
 				{
-					m_actors["ã"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal1.png"));
+					m_actors["ƒS[ƒ‹"].push_back(new Goal(chip_pos, GoalType::UP, goal_grp_list));
 				}
 				else if ((has_max_num || !has_max_num && *m_map[i + 1][j] != 9))
 				{
-					m_actors["‰º"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal3.png"));
+					m_actors["ƒS[ƒ‹"].push_back(new Goal(chip_pos, GoalType::DOWN, goal_grp_list));
 				}
 				else 
 				{
-					m_actors["’†"].push_back(new Goal(chip_pos, "Res/Game/Mapchip/Goal2.png"));
+					m_actors["ƒS[ƒ‹"].push_back(new Goal(chip_pos, GoalType::MIDDLE, goal_grp_list));
 				}
 				#pragma endregion
 			}
@@ -103,21 +113,9 @@ void ActorManager::Draw()
 	}
 
 	#pragma region ƒS[ƒ‹
-	for (auto i : m_actors["ŒÂ"])
+	for (auto i : m_actors["ƒS[ƒ‹"])
 	{
-		i->Draw("Res/Game/Mapchip/Goal0.png", m_camera_ptr);
-	}
-	for (auto i : m_actors["ã"])
-	{
-		i->Draw("Res/Game/Mapchip/Goal1.png", m_camera_ptr);
-	}
-	for (auto i : m_actors["’†"])
-	{
-		i->Draw("Res/Game/Mapchip/Goal2.png", m_camera_ptr);
-	}
-	for (auto i : m_actors["‰º"])
-	{
-		i->Draw("Res/Game/Mapchip/Goal3.png", m_camera_ptr);
+		i->Draw();
 	}
 	#pragma endregion
 

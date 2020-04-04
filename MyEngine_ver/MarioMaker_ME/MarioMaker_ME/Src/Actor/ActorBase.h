@@ -58,5 +58,9 @@ protected:
 
 	t_ActorState m_state;		//!< アクターのステータス
 	Drawer2D m_drawer2d;		//!< 描画クラス		
+	// 試験中
+	std::map<std::string, std::string*> m_name_list;
+	Camera* m_camera_ptr;
+
 };
 

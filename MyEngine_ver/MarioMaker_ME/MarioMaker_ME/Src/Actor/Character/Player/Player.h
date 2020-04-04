@@ -26,15 +26,7 @@ public:
 		m_camera_ptr = new Camera();
 		m_camera_ptr = acs->GetCurrCameraPTR();
 	};
-	//Player(Pos2 pos_, std::string fileName_) 
-	//{ 
-	//	Accessor* acs = Accessor::GetInstance();
-	//	if (!acs) { return; };
 
-	//	Init(pos_, fileName_);
-	//	m_camera_ptr = new Camera();
-	//	m_camera_ptr = acs->GetCurrCameraPTR();
-	//};
 	~Player() override;		//!< デストラクタ	
 
 	void Init(Pos2 pos__) override;	//!< 初期化
@@ -54,9 +46,5 @@ private:
 	int m_count;
 	bool m_short_jump;
 
-	Camera* m_camera_ptr;
-
-	// 試験中
-	std::map<std::string, std::string*> m_name_list;
 };
 
