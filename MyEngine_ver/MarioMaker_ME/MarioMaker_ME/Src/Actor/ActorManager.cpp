@@ -38,7 +38,7 @@ void ActorManager::Init(std::string map_name_)
 
 			Pos2 chip_pos(pos_x, pos_y);
 
-			#pragma region プレイヤー画像読み込み試験中
+			#pragma region プレイヤー画像読み込み
 			std::map<std::string, std::string*> player_grp_list;
 
 			player_grp_list["移動"] = new std::string("Res/Game/Mapchip/player.png");
@@ -46,7 +46,7 @@ void ActorManager::Init(std::string map_name_)
 
 			#pragma endregion
 
-			#pragma region ゴール画像読み込み試験中
+			#pragma region ゴール画像読み込み
 			std::map<std::string, std::string*> goal_grp_list;
 
 			goal_grp_list["個"] = new std::string("Res/Game/Mapchip/Goal0.png");
@@ -56,9 +56,26 @@ void ActorManager::Init(std::string map_name_)
 
 			#pragma endregion
 
+			#pragma region ブロック画像読み込み
+			std::map<std::string, std::string*> block_grp_list;
+
+			block_grp_list["ブロック"] = new std::string("Res/Game/Mapchip/block.png");
+			block_grp_list["アイスブロック"] = new std::string("Res/Game/Mapchip/block.png");
+
+			#pragma endregion
+
+			#pragma region エネミー画像読み込み
+			std::map<std::string, std::string*> enemy_grp_list;
+
+			enemy_grp_list["クリボー"] = new std::string("Res/Game/Mapchip/enemy.png");
+			enemy_grp_list["ノコノコ"] = new std::string("Res/Game/Mapchip/enemy.png");
+			enemy_grp_list["ボム兵"] = new std::string("Res/Game/Mapchip/enemy.png");
+
+			#pragma endregion
+
 			if (*m_map[i][j] == 1)
 			{
-				m_actors["ブロック"].push_back(new Block(chip_pos, "Res/Game/Mapchip/block.png"));
+				m_actors["ブロック"].push_back(new Block(chip_pos, block_grp_list));
 			}
 			if (*m_map[i][j] == 2)
 			{
@@ -66,7 +83,7 @@ void ActorManager::Init(std::string map_name_)
 			}
 			if (*m_map[i][j] == 3)
 			{
-				m_actors["エネミー"].push_back(new Enemy(chip_pos, "Res/Game/Mapchip/enemy.png"));
+				m_actors["エネミー"].push_back(new Enemy(chip_pos, enemy_grp_list));
 			}
 			if (*m_map[i][j] == 9)
 			{
@@ -104,12 +121,12 @@ void ActorManager::Draw()
 {
 	for(auto i : m_actors["ブロック"])
 	{
-		i->Draw("Res/Game/Mapchip/block.png", m_camera_ptr);
+		i->Draw();
 	}
 
 	for(auto i : m_actors["エネミー"])
 	{
-		i->Draw("Res/Game/Mapchip/enemy.png", m_camera_ptr);
+		i->Draw();
 	}
 
 	#pragma region ゴール

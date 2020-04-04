@@ -5,9 +5,12 @@ Block::~Block()
 {
 }
 
-void Block::Init(Pos2 pos_, std::string fileName_)
+void Block::Init(Pos2 pos_)
 {
-	m_drawer2d.LoadTexture(fileName_);
+	for (auto i : m_name_list)
+	{
+		m_drawer2d.LoadTexture(*i.second);
+	}
 
 	ZeroMemory(&m_state, sizeof(t_ActorState));
 
@@ -16,7 +19,6 @@ void Block::Init(Pos2 pos_, std::string fileName_)
 
 	m_state.size.height = MAP_CHIP_SIZE;
 	m_state.size.width = MAP_CHIP_SIZE;
-
 
 	m_state.has_on_ground = false;
 
@@ -32,8 +34,21 @@ void Block::Update()
 	m_state.pos.y += gravity_power;
 
 }
-void Block::Draw(std::string fileName_, Camera* camera_) {
-	m_drawer2d.DrawTexture(m_state.pos, fileName_, camera_);
+void Block::Draw()
+{
+	switch (m_type)
+	{
+	case BlockType::NORMAL:
+		m_drawer2d.DrawTexture(m_state.pos, *m_name_list["ブロック"], m_camera_ptr);
+		break;
+	case BlockType::ICE:
+		m_drawer2d.DrawTexture(m_state.pos, *m_name_list["アイスブロック"], m_camera_ptr);
+		break;
+	case BlockType::ETC:
+		break;
+	default:
+		break;
+	}
 }
 
 void Block::Release() {
