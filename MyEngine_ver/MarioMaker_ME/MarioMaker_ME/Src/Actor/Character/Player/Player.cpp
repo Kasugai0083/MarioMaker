@@ -37,18 +37,22 @@ bool Player::DeathAnimation()
 	Accessor* acs = Accessor::GetInstance();
 	if (!acs) { return false; }
 
+	const float DEATH_JUMP_POWER = 10.f;
+
 	if (m_state.is_death)
 	{
 		static int count = 0;
 
 		if (count == DEATH_WAIT)
 		{
-			m_state.grav_accel -= m_state.jump_power;
+			m_state.grav_accel -= DEATH_JUMP_POWER;
 		}
 		else if (count >= DEATH_ANIMATION_TIME)
 		{
 			count = 0;
 			m_state.can_next_scene = true;
+
+			return true;
 		}
 		else if (count > DEATH_WAIT)
 		{

@@ -1,3 +1,11 @@
+●開発環境
+・プログラミングツール：VisualStudio2019
+・エンジン：DirectX9
+・GitHub：https://github.com/Kasugai0083/MarioMaker
+　
+※DirectX9を導入していない場合はインストーラーを実行して、
+　導入してください。
+
 ●概要
 　個人制作のアクションゲームです。現在、制作途中。
 　残りの実装項目として
