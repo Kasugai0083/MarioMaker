@@ -161,10 +161,21 @@ void ActorManager::PlayerAndGoalCollide()
 	for (auto player : m_actors["プレイヤー"])
 	{
 		std::vector<std::string> type_string;
-		type_string.push_back("個");
+	/*	type_string.push_back("個");
 		type_string.push_back("上");
 		type_string.push_back("中");
-		type_string.push_back("下");
+		type_string.push_back("下");*/
+		type_string.push_back("ゴール");
+
+		//std::string test = "個";
+
+		//if (SurroundingSurvey(m_actors[test]->GetState(), player->GetState()))
+		//{
+		//	if (Calculator::ForceRectCollision(player->GetState(), m_actors[test]->GetState()) != ForceHit::NONE)
+		//	{
+		//		*m_clear_ptr = true;
+		//	}
+		//}
 
 		for (auto string : type_string)
 		{
