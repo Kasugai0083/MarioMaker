@@ -21,10 +21,42 @@ void Enemy::Init(Pos2 pos_)
 
 	m_state.weight = 1.f;
 	m_state.speed = 1.f;
+
+	m_state.curr_vec.x = -1.f;
 }
 
 void Enemy::Update()
 {
+	// ベクトル情報の管理 start
+	m_state.old_pos = m_state.pos;
+	// ベクトル情報の管理 end
+
+
+	// 加速処理 start
+	if (m_state.curr_vec.x > 0)
+	{
+		m_state.accel += m_state.speed;
+	}
+	else
+	{
+		m_state.accel -= m_state.speed;
+	}
+
+	if (m_state.accel >= ENEMY_MAX_SPEED) { m_state.accel = ENEMY_MAX_SPEED; }
+	if (m_state.accel <= -ENEMY_MAX_SPEED) { m_state.accel = -ENEMY_MAX_SPEED; }
+	// 加速処理 end
+
+	// 移動処理 start
+	m_state.pos.x += m_state.accel;
+	// 移動処理 end
+
+	// ベクトルの計算 start
+	m_state.curr_vec = m_state.pos - m_state.old_pos;
+	if (m_state.curr_vec.y > 0)
+	{
+		m_state.has_on_ground = false;
+	}
+	// ベクトルの計算 end
 
 }
 

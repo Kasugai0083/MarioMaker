@@ -241,6 +241,89 @@ void ActorManager::PlayerAndBlockCollide()
 	}
 }
 
+
+void ActorManager::EnemyAndBlockCollide()
+{
+	// ブロックとプレイヤーの当たり start
+	Pos2 curr_block(0.f, 0.f);
+
+	for (auto block : m_actors["ブロック"])
+	{
+		for (auto enemy : m_actors["エネミー"])
+		{
+			if (enemy->GetState().is_death) { return; }
+			// 周辺調査
+			if (SurroundingSurvey(block->GetState(), enemy->GetState()))
+			{
+				/**
+				* 4分割処理
+				*/
+				if (Calculator::ForceRectCollision(enemy->GetState(), block->GetState()) == ForceHit::UPPER_SIDE)
+				{
+
+					float enemy_x = enemy->GetPos().x;
+					float enemy_y = block->GetPos().y - MAP_CHIP_SIZE;
+
+					enemy->SetPos(Pos2(enemy_x, enemy_y));
+
+					enemy->SetHasOnGround(true);
+
+				}
+				else if (Calculator::ForceRectCollision(enemy->GetState(), block->GetState()) == ForceHit::LEFT_SIDE)
+				{
+
+					float enemy_x = block->GetPos().x - MAP_CHIP_SIZE;
+					float enemy_y = enemy->GetPos().y;
+
+					enemy->SetPos(Pos2(enemy_x, enemy_y));
+
+					if (enemy->GetCurrVec().x > 0) 
+					{
+						enemy->SetCurrVec(t_Vec2(-1.f,0.f));
+					}
+					else
+					{
+						enemy->SetCurrVec(t_Vec2(1.f, 0.f));
+					}
+					enemy->SetAccel(0.f);
+
+				}
+				else if (Calculator::ForceRectCollision(enemy->GetState(), block->GetState()) == ForceHit::RIGHT_SIDE)
+				{
+
+					float enemy_x = block->GetPos().x + MAP_CHIP_SIZE;
+					float enemy_y = enemy->GetPos().y;
+
+					enemy->SetPos(Pos2(enemy_x, enemy_y));
+
+					if (enemy->GetCurrVec().x > 0)
+					{
+						enemy->SetCurrVec(t_Vec2(-1.f, 0.f));
+					}
+					else
+					{
+						enemy->SetCurrVec(t_Vec2(1.f, 0.f));
+					}
+
+					enemy->SetAccel(0.f);
+				}
+				else if (Calculator::ForceRectCollision(enemy->GetState(), block->GetState()) == ForceHit::UNDER_SIDE)
+				{
+
+					float enemy_x = enemy->GetPos().x;
+					float enemy_y = block->GetPos().y + MAP_CHIP_SIZE;
+
+					enemy->SetPos(Pos2(enemy_x, enemy_y));
+					enemy->SetGrvAccel(0.f);
+
+				}
+
+			}
+		}
+	}
+}
+
+
 void ActorManager::CheckPlayerDeath()
 {
 	for (auto player : m_actors["プレイヤー"])
@@ -286,7 +369,8 @@ void ActorManager::Update()
 	// プレイヤーが全員死んでるか判定
 	CheckPlayerDeath();
 
-
+	// エネミーとブロックの当たり
+	EnemyAndBlockCollide();
 }
 
 void ActorManager::Release()

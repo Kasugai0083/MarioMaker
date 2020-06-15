@@ -9,8 +9,8 @@ void GameScene::Init()
 {
 	m_drawer2d.LoadTexture("Res/Game/game_main_bg.png");
 
-	//m_map_mgr.Init("Csv/stage01.csv");
-	m_map_mgr.Init("Csv/stage_long.csv");
+	m_map_mgr.Init("Csv/stage01.csv");
+	//m_map_mgr.Init("Csv/stage_long.csv");
 	//m_map_mgr.Init("Csv/stage_small.csv");
 	//m_map_mgr.Init("Csv/stage_small2.csv");
 

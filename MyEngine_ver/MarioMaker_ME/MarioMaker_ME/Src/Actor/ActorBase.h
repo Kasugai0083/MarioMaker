@@ -40,7 +40,7 @@ public:
 	Pos2 GetPos() { return m_state.pos; }						//!< 座標取得
 	void SetPos(Pos2 pos_) { m_state.pos = pos_; }				//!< 座標変更
 
-	void SetAccel(float accel_) { m_state.accel = accel_; }	//!< 重力加速度変更
+	void SetAccel(float accel_) { m_state.accel = accel_; }	//!< 加速度変更
 
 	void SetGrvAccel(float gravity_) { m_state.grav_accel = gravity_; }	//!< 重力加速度変更
 	float GetGrvAccel() { return m_state.grav_accel; }					//!< 重力加速度の取得
@@ -48,6 +48,7 @@ public:
 	void SetHasOnGround(bool has_) { m_state.has_on_ground = has_; }	//!< ジャンプフラグ変更
 	bool GetHasOnGround() { return m_state.has_on_ground; }			//!< ジャンプフラグの取得
 
+	void SetCurrVec(t_Vec2 vec_) { m_state.curr_vec = vec_; }			//!< ベクトルの変更
 	t_Vec2 GetCurrVec() { return m_state.curr_vec; }			//!< ジャンプフラグの取得
 
 	t_ASta GetState() { return m_state; }			//!< ジャンプフラグの取得
