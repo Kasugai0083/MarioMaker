@@ -38,6 +38,7 @@ private:
 
 	void PlayerAndBlockCollide();
 	void EnemyAndBlockCollide();
+	void PlayerAndEnemyCollide();
 	void PlayerAndGoalCollide();
 	void CheckPlayerDeath();
 

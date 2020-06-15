@@ -323,6 +323,48 @@ void ActorManager::EnemyAndBlockCollide()
 	}
 }
 
+void ActorManager::PlayerAndEnemyCollide()
+{
+	// ブロックとプレイヤーの当たり start
+	Pos2 curr_block(0.f, 0.f);
+
+	for (auto player : m_actors["プレイヤー"])
+	{
+		for (auto enemy : m_actors["エネミー"])
+		{
+			if (enemy->GetState().is_death) { return; }
+			// 周辺調査
+			if (SurroundingSurvey(player->GetState(), enemy->GetState()))
+			{
+				/**
+				* 4分割処理
+				*/
+				if (Calculator::ForceRectCollision(player->GetState(), enemy->GetState()) == ForceHit::UPPER_SIDE)
+				{
+					player->SetIsDeath(true);
+				}
+				else if (Calculator::ForceRectCollision(player->GetState(), enemy->GetState()) == ForceHit::LEFT_SIDE)
+				{
+					player->SetIsDeath(true);
+				}
+				else if (Calculator::ForceRectCollision(player->GetState(), enemy->GetState()) == ForceHit::RIGHT_SIDE)
+				{
+					player->SetIsDeath(true);
+				}
+				else if (Calculator::ForceRectCollision(player->GetState(), enemy->GetState()) == ForceHit::UNDER_SIDE)
+				{
+					player->SetIsDeath(true);
+				}
+				else if (Calculator::ForceRectCollision(player->GetState(), enemy->GetState()) == ForceHit::HOLD)
+				{
+					player->SetIsDeath(true);
+				}
+
+			}
+		}
+	}
+}
+
 
 void ActorManager::CheckPlayerDeath()
 {
@@ -350,6 +392,9 @@ void ActorManager::Update()
 	m_camera_ptr->Update(camera_pos);
 	// カメラのアップデート end
 
+
+
+
 	// アクター全体の更新処理 start
 	for (auto i : m_actors)
 	{
@@ -371,6 +416,9 @@ void ActorManager::Update()
 
 	// エネミーとブロックの当たり
 	EnemyAndBlockCollide();
+
+	// プレイヤーとエネミーの当たり
+	PlayerAndEnemyCollide();
 }
 
 void ActorManager::Release()

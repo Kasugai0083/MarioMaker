@@ -48,7 +48,14 @@ public:
 	void SetHasOnGround(bool has_) { m_state.has_on_ground = has_; }	//!< ジャンプフラグ変更
 	bool GetHasOnGround() { return m_state.has_on_ground; }			//!< ジャンプフラグの取得
 
-	void SetCurrVec(t_Vec2 vec_) { m_state.curr_vec = vec_; }			//!< ベクトルの変更
+	void SetCurrVec(t_Vec2 vec_)	//!< ベクトルの変更 
+	{ 
+		if (vec_.x != 0.f) { m_state.curr_vec.x = vec_.x; }
+		if (vec_.y != 0.f) { m_state.curr_vec.y = vec_.y; }
+	}
+
+	void SetIsDeath(bool death_) { m_state.is_death = death_; }
+
 	t_Vec2 GetCurrVec() { return m_state.curr_vec; }			//!< ジャンプフラグの取得
 
 	t_ASta GetState() { return m_state; }			//!< ジャンプフラグの取得

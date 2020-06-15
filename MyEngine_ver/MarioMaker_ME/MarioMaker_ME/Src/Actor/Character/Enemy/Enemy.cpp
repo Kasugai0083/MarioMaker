@@ -22,11 +22,16 @@ void Enemy::Init(Pos2 pos_)
 	m_state.weight = 1.f;
 	m_state.speed = 1.f;
 
+	m_state.is_death = false;
+
 	m_state.curr_vec.x = -1.f;
 }
 
 void Enemy::Update()
 {
+	Accessor* acs = Accessor::GetInstance();
+	if (!acs) { return; }
+
 	// ベクトル情報の管理 start
 	m_state.old_pos = m_state.pos;
 	// ベクトル情報の管理 end
@@ -46,9 +51,16 @@ void Enemy::Update()
 	if (m_state.accel <= -ENEMY_MAX_SPEED) { m_state.accel = -ENEMY_MAX_SPEED; }
 	// 加速処理 end
 
-	// 移動処理 start
+	if (m_state.has_on_ground)
+	{
+		m_state.grav_accel = 0.f;
+	}
+	m_state.grav_accel += acs->GetCurrGravity() * m_state.weight;
+
+	// 加速度を座標に反映 start
 	m_state.pos.x += m_state.accel;
-	// 移動処理 end
+	m_state.pos.y += m_state.grav_accel;
+	// 加速度を座標に反映 end
 
 	// ベクトルの計算 start
 	m_state.curr_vec = m_state.pos - m_state.old_pos;
